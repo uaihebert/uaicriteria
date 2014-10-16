@@ -1,5 +1,8 @@
 # uaiCriteria 
 ## How can JPA criteria became easier?
+
+### BuildStatus ---> [![Build Status](https://travis-ci.org/uaihebert/uaicriteria.svg?branch=master)](https://travis-ci.org/uaihebert/uaicriteria)
+
 > Yes, your JPA Criteria can be easy. All you need to do is to add uaiCriteria in your implementation. 
 >
 >Imagine that you want to run the following JPQL: 
