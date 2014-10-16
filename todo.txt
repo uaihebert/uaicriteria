@@ -1,0 +1,19 @@
+* abrir bug do is not member of do eclipselink e adicionar warning
+* abrir bug do is empty para map do hibernate
+* abrir bug enum, sum in (e outros) para batoo
+
+* Criar CriteriaDataHolder
+
+* criar where property 1 like '%A%' and property 1 like 'B'  OR property 2 like '%A%' and property 2 like 'B'
+
+* Criar tests para composite key
+
+* case in query
+
+* @Embeddable com classes normais, algo como pessoa tem endereço
+
+* distinct em outros atributos que não o ID, como: Select distinct modelo from carros;
+
+* meta model
+
+    Other framework: http://sourceforge.net/projects/easy-criteria/files/

@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<persistence xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             version="2.0" xmlns="http://java.sun.com/xml/ns/persistence"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+
+    <persistence-unit name="QueryTesterHibernate" transaction-type="RESOURCE_LOCAL">
+        <provider>org.hibernate.ejb.HibernatePersistence</provider>
+
+        <mapping-file>orm.xml</mapping-file>
+
+        <properties>
+            <property name="javax.persistence.jdbc.driver" value="org.hsqldb.jdbcDriver"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:hsqldb:mem:hibernate"/>
+            <property name="javax.persistence.jdbc.user" value="sa"/>
+            <property name="javax.persistence.jdbc.password" value=""/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect"/>
+            <property name="hibernate.connection.shutdown" value="true"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="javax.persistence.validation.mode" value="none"/>
+
+            <!--<property name="hibernate.show_sql" value="true"/>-->
+            <!--<property name="hibernate.format_sql" value="true"/>-->
+        </properties>
+    </persistence-unit>
+
+    <persistence-unit name="QueryTesterHibernate2" transaction-type="RESOURCE_LOCAL">
+        <provider>org.hibernate.ejb.HibernatePersistence</provider>
+
+        <mapping-file>orm2.xml</mapping-file>
+
+        <properties>
+            <property name="javax.persistence.jdbc.driver" value="org.hsqldb.jdbcDriver"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:hsqldb:mem:hibernate"/>
+            <property name="javax.persistence.jdbc.user" value="sa"/>
+            <property name="javax.persistence.jdbc.password" value=""/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect"/>
+            <property name="hibernate.connection.shutdown" value="true"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="javax.persistence.validation.mode" value="none"/>
+
+            <!--<property name="hibernate.show_sql" value="true"/>-->
+            <!--<property name="hibernate.format_sql" value="true"/>-->
+        </properties>
+    </persistence-unit>
+
+    <persistence-unit name="QueryTesterOpenJPA" transaction-type="RESOURCE_LOCAL">
+        <provider>org.apache.openjpa.persistence.PersistenceProviderImpl</provider>
+
+        <mapping-file>orm.xml</mapping-file>
+
+        <properties>
+            <property name="openjpa.ConnectionDriverName" value="org.hsqldb.jdbcDriver"/>
+            <property name="openjpa.ConnectionURL" value="jdbc:hsqldb:mem:OPenJPA"/>
+            <property name="openjpa.ConnectionUserName" value="sa"/>
+            <property name="openjpa.ConnectionPassword" value=""/>
+            <property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema(ForeignKeys=true)"/>
+
+            <!--<property name="openjpa.Log" value="DefaultLevel=WARN, Runtime=INFO, Tool=INFO, SQL=TRACE"/>-->
+        </properties>
+    </persistence-unit>
+
+    <persistence-unit name="QueryTesterOpenJPA2" transaction-type="RESOURCE_LOCAL">
+        <provider>org.apache.openjpa.persistence.PersistenceProviderImpl</provider>
+
+        <mapping-file>orm2.xml</mapping-file>
+
+        <properties>
+            <property name="openjpa.DataCache" value="false"/>
+            <property name="openjpa.QueryCache" value="false"/>
+            <property name="openjpa.CacheSize" value="0"/>
+            <property name="openjpa.jdbc.QuerySQLCache" value="false"/>
+
+            <property name="openjpa.ConnectionDriverName" value="org.hsqldb.jdbcDriver"/>
+            <property name="openjpa.ConnectionURL" value="jdbc:hsqldb:mem:OPenJPA"/>
+            <property name="openjpa.ConnectionUserName" value="sa"/>
+            <property name="openjpa.ConnectionPassword" value=""/>
+            <property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema(ForeignKeys=true)"/>
+
+            <!--<property name="openjpa.Log" value="DefaultLevel=WARN, Runtime=TRACE, Tool=TRACE, SQL=TRACE"/>-->
+        </properties>
+    </persistence-unit>
+
+    <persistence-unit name="QueryTesterBatoo2" transaction-type="RESOURCE_LOCAL">
+        <provider>org.batoo.jpa.core.BatooPersistenceProvider</provider>
+
+        <mapping-file>batooOrm.xml</mapping-file>
+
+        <properties>
+            <property name="javax.persistence.jdbc.driver" value="org.hsqldb.jdbcDriver"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:hsqldb:mem:batoo"/>
+            <property name="javax.persistence.jdbc.user" value="sa"/>
+            <property name="javax.persistence.jdbc.password" value=""/>
+
+            <property name="org.batoo.jpa.ddl" value="DROP"/>
+
+            <!--org.batoo.jpa.sql_logging :: NONE | STDOUT | STDERR -->
+            <property name="org.batoo.jpa.sql_logging" value="NONE"/>
+        </properties>
+    </persistence-unit>
+
+    <persistence-unit name="QueryTesterEclipseLink" transaction-type="RESOURCE_LOCAL">
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+
+        <mapping-file>orm.xml</mapping-file>
+
+        <properties>
+            <property name="javax.persistence.jdbc.driver" value="org.hsqldb.jdbcDriver"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:hsqldb:mem:eclipseLink"/>
+            <property name="javax.persistence.jdbc.user" value="sa"/>
+            <property name="javax.persistence.jdbc.password" value=""/>
+            <property name="eclipselink.ddl-generation" value="create-tables"/>
+            <property name="eclipselink.ddl-generation.output-mode" value="database"/>
+
+            <!--<property name="eclipselink.logging.level" value="FINEST"/>-->
+        </properties>
+    </persistence-unit>
+
+    <persistence-unit name="QueryTesterEclipseLink2" transaction-type="RESOURCE_LOCAL">
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+
+        <mapping-file>orm2.xml</mapping-file>
+
+        <properties>
+            <property name="javax.persistence.jdbc.driver" value="org.hsqldb.jdbcDriver"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:hsqldb:mem:eclipseLink"/>
+            <property name="javax.persistence.jdbc.user" value="sa"/>
+            <property name="javax.persistence.jdbc.password" value=""/>
+            <property name="eclipselink.ddl-generation" value="create-tables"/>
+            <property name="eclipselink.ddl-generation.output-mode" value="database"/>
+
+            <!--<property name="eclipselink.logging.level" value="FINEST"/>-->
+        </properties>
+    </persistence-unit>
+
+    <persistence-unit name="QueryTesterEclipseLinkPostgre" transaction-type="RESOURCE_LOCAL">
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+
+        <mapping-file>orm.xml</mapping-file>
+
+        <properties>
+            <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/easy"/>
+            <property name="javax.persistence.jdbc.user" value="postgres"/>
+            <property name="javax.persistence.jdbc.password" value="postgres"/>
+            <property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
+            <property name="eclipselink.ddl-generation.output-mode" value="database"/>
+
+            <!--<property name="eclipselink.logging.level" value="FINEST"/>-->
+        </properties>
+    </persistence-unit>
+</persistence>

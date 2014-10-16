@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xmlns="http://java.sun.com/xml/ns/persistence/orm"
+                 xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd"
+                 version="1.0">
+
+    <!--
+        There is a bug for Batoo, it does not support composite key
+
+        https://github.com/BatooOrg/BatooJPA/issues/225
+    -->
+
+    <entity class="com.uaihebert.model.test.RegularEntityOne"/>
+    <entity class="com.uaihebert.model.test.RegularEntityTwo"/>
+    <entity class="com.uaihebert.model.test.RegularEntityThree"/>
+    <entity class="com.uaihebert.model.test.RegularEntityFour"/>
+    <entity class="com.uaihebert.model.test.RegularEntityFive"/>
+
+    <entity class="com.uaihebert.model.test.InheritanceRootEntity">
+        <inheritance/>
+    </entity>
+    <entity class="com.uaihebert.model.test.InheritanceFamilyOneEntity"/>
+    <entity class="com.uaihebert.model.test.InheritanceFamilyOneChildEntity"/>
+    <entity class="com.uaihebert.model.test.InheritanceFamilyTwoEntity"/>
+</entity-mappings>
