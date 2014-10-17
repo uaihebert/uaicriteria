@@ -57,12 +57,12 @@ public class ExceptionSubQueryTest extends AbstractTest {
     }
 
     @Test(expected = IllegalStateException.class)
-    public void isRaisingExceptionIfGetTupleResultIsInvoked() {
+    public void isRaisingExceptionIfGetMultiSelectResultIsInvoked() {
         final UaiCriteria<RegularEntityTwo> uaiCriteria = createCriteria(RegularEntityTwo.class);
 
         final UaiCriteria<RegularEntityOne> subQuery = uaiCriteria.subQuery("id", RegularEntityOne.class);
 
-        subQuery.getTupleResult();
+        subQuery.getMultiSelectResult();
     }
 
     @Test(expected = IllegalStateException.class)

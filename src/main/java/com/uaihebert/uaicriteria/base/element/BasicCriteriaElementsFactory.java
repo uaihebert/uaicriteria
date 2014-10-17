@@ -26,7 +26,7 @@ public final class BasicCriteriaElementsFactory {
 
     public static <T> BasicCriteriaElements create(final EntityManager entityManager, final Class<T> entityClass, final QueryType queryType) {
         if (QueryType.TUPLE.equals(queryType)) {
-            return createForTupleQuery(entityManager, entityClass);
+            return createForMultiSelectQuery(entityManager, entityClass);
         }
 
         return createForRegularQuery(entityManager, entityClass);
@@ -53,11 +53,11 @@ public final class BasicCriteriaElementsFactory {
         return basicCriteriaElements;
     }
 
-    private static <T> BasicCriteriaElements createForTupleQuery(final EntityManager entityManager, final Class<T> entityClass) {
+    private static <T> BasicCriteriaElements createForMultiSelectQuery(final EntityManager entityManager, final Class<T> entityClass) {
         final BasicCriteriaElements basicCriteriaElements = createBasicElements(entityManager);
 
-        final BaseCriteria<T> tupleBaseCriteria = BaseCriteriaFactory.createTupleBaseCriteria(entityManager, entityClass);
-        basicCriteriaElements.setTupleCriteria(tupleBaseCriteria);
+        final BaseCriteria<T> multiSelectBaseCriteria = BaseCriteriaFactory.createMultiSelectBaseCriteria(entityManager, entityClass);
+        basicCriteriaElements.setMultiSelectCriteria(multiSelectBaseCriteria);
 
         return basicCriteriaElements;
     }

@@ -17,8 +17,8 @@ package com.uaihebert.uaicriteria.criteria;
 
 import com.uaihebert.uaicriteria.base.element.BaseCriteria;
 import com.uaihebert.uaicriteria.base.element.BasicCriteriaElements;
+import com.uaihebert.uaicriteria.path.MultiSelectQueryPathCreator;
 import com.uaihebert.uaicriteria.path.RegularQueryPathCreator;
-import com.uaihebert.uaicriteria.path.TupleQueryPathCreator;
 import com.uaihebert.uaicriteria.subquery.SubQueryImp;
 
 import java.util.List;
@@ -320,15 +320,15 @@ public class CriteriaCreator {
         final List<BaseCriteria> baseCriteriaList = basicCriteriaElements.getBaseCriteriaList();
 
         for (final BaseCriteria baseCriteria : baseCriteriaList) {
-            TupleQueryPathCreator.sum(baseCriteria, attributeNameArray);
+            MultiSelectQueryPathCreator.sum(baseCriteria, attributeNameArray);
         }
     }
 
-    public void addTupleSelectAttribute(final String... attributeNameArray) {
+    public void addMultiSelectSelectAttribute(final String... attributeNameArray) {
         final List<BaseCriteria> baseCriteriaList = basicCriteriaElements.getBaseCriteriaList();
 
         for (final BaseCriteria baseCriteria : baseCriteriaList) {
-            TupleQueryPathCreator.addTupleSelectAttribute(baseCriteria, attributeNameArray);
+            MultiSelectQueryPathCreator.addMultiSelectSelectAttribute(baseCriteria, attributeNameArray);
         }
     }
 
@@ -336,7 +336,7 @@ public class CriteriaCreator {
         final List<BaseCriteria> baseCriteriaList = basicCriteriaElements.getBaseCriteriaList();
 
         for (final BaseCriteria baseCriteria : baseCriteriaList) {
-            TupleQueryPathCreator.avg(baseCriteria, attributeNameArray);
+            MultiSelectQueryPathCreator.avg(baseCriteria, attributeNameArray);
         }
     }
 
@@ -344,7 +344,7 @@ public class CriteriaCreator {
         final List<BaseCriteria> baseCriteriaList = basicCriteriaElements.getBaseCriteriaList();
 
         for (final BaseCriteria baseCriteria : baseCriteriaList) {
-            TupleQueryPathCreator.square(baseCriteria, attributeNameArray);
+            MultiSelectQueryPathCreator.square(baseCriteria, attributeNameArray);
         }
     }
 
@@ -352,7 +352,7 @@ public class CriteriaCreator {
         final List<BaseCriteria> baseCriteriaList = basicCriteriaElements.getBaseCriteriaList();
 
         for (final BaseCriteria baseCriteria : baseCriteriaList) {
-            TupleQueryPathCreator.sum(baseCriteria, attributeName, number);
+            MultiSelectQueryPathCreator.sum(baseCriteria, attributeName, number);
         }
     }
 
@@ -360,7 +360,7 @@ public class CriteriaCreator {
         final List<BaseCriteria> baseCriteriaList = basicCriteriaElements.getBaseCriteriaList();
 
         for (final BaseCriteria baseCriteria : baseCriteriaList) {
-            TupleQueryPathCreator.sum(baseCriteria, number, attributeName);
+            MultiSelectQueryPathCreator.sum(baseCriteria, number, attributeName);
         }
     }
 
@@ -368,7 +368,7 @@ public class CriteriaCreator {
         final List<BaseCriteria> baseCriteriaList = basicCriteriaElements.getBaseCriteriaList();
 
         for (final BaseCriteria baseCriteria : baseCriteriaList) {
-            TupleQueryPathCreator.groupBy(baseCriteria, attributeName);
+            MultiSelectQueryPathCreator.groupBy(baseCriteria, attributeName);
         }
     }
 
@@ -376,7 +376,7 @@ public class CriteriaCreator {
         final List<BaseCriteria> baseCriteriaList = basicCriteriaElements.getBaseCriteriaList();
 
         for (final BaseCriteria baseCriteria : baseCriteriaList) {
-            TupleQueryPathCreator.diff(baseCriteria, firstAttribute, secondAttribute);
+            MultiSelectQueryPathCreator.diff(baseCriteria, firstAttribute, secondAttribute);
         }
     }
 
@@ -384,7 +384,7 @@ public class CriteriaCreator {
         final List<BaseCriteria> baseCriteriaList = basicCriteriaElements.getBaseCriteriaList();
 
         for (final BaseCriteria baseCriteria : baseCriteriaList) {
-            TupleQueryPathCreator.diff(baseCriteria, attributeName, number);
+            MultiSelectQueryPathCreator.diff(baseCriteria, attributeName, number);
         }
     }
 
@@ -392,7 +392,7 @@ public class CriteriaCreator {
         final List<BaseCriteria> baseCriteriaList = basicCriteriaElements.getBaseCriteriaList();
 
         for (final BaseCriteria baseCriteria : baseCriteriaList) {
-            TupleQueryPathCreator.diff(baseCriteria, number, attributeName);
+            MultiSelectQueryPathCreator.diff(baseCriteria, number, attributeName);
         }
     }
 
@@ -400,7 +400,7 @@ public class CriteriaCreator {
         final List<BaseCriteria> baseCriteriaList = basicCriteriaElements.getBaseCriteriaList();
 
         for (final BaseCriteria baseCriteria : baseCriteriaList) {
-            TupleQueryPathCreator.multiply(baseCriteria, firstAttribute, secondAttribute);
+            MultiSelectQueryPathCreator.multiply(baseCriteria, firstAttribute, secondAttribute);
         }
     }
 
@@ -408,7 +408,7 @@ public class CriteriaCreator {
         final List<BaseCriteria> baseCriteriaList = basicCriteriaElements.getBaseCriteriaList();
 
         for (final BaseCriteria baseCriteria : baseCriteriaList) {
-            TupleQueryPathCreator.multiply(baseCriteria, attributeName, number);
+            MultiSelectQueryPathCreator.multiply(baseCriteria, attributeName, number);
         }
     }
 
@@ -416,7 +416,7 @@ public class CriteriaCreator {
         final List<BaseCriteria> baseCriteriaList = basicCriteriaElements.getBaseCriteriaList();
 
         for (final BaseCriteria baseCriteria : baseCriteriaList) {
-            TupleQueryPathCreator.multiply(baseCriteria, number, attributeName);
+            MultiSelectQueryPathCreator.multiply(baseCriteria, number, attributeName);
         }
     }
 
@@ -424,7 +424,7 @@ public class CriteriaCreator {
         final List<BaseCriteria> baseCriteriaList = basicCriteriaElements.getBaseCriteriaList();
 
         for (final BaseCriteria baseCriteria : baseCriteriaList) {
-            TupleQueryPathCreator.divide(baseCriteria, firstAttribute, secondAttribute);
+            MultiSelectQueryPathCreator.divide(baseCriteria, firstAttribute, secondAttribute);
         }
     }
 
@@ -432,7 +432,7 @@ public class CriteriaCreator {
         final List<BaseCriteria> baseCriteriaList = basicCriteriaElements.getBaseCriteriaList();
 
         for (final BaseCriteria baseCriteria : baseCriteriaList) {
-            TupleQueryPathCreator.divide(baseCriteria, attributeName, number);
+            MultiSelectQueryPathCreator.divide(baseCriteria, attributeName, number);
         }
     }
 
@@ -440,7 +440,7 @@ public class CriteriaCreator {
         final List<BaseCriteria> baseCriteriaList = basicCriteriaElements.getBaseCriteriaList();
 
         for (final BaseCriteria baseCriteria : baseCriteriaList) {
-            TupleQueryPathCreator.divide(baseCriteria, number, attributeName);
+            MultiSelectQueryPathCreator.divide(baseCriteria, number, attributeName);
         }
     }
 
@@ -448,7 +448,7 @@ public class CriteriaCreator {
         final List<BaseCriteria> baseCriteriaList = basicCriteriaElements.getBaseCriteriaList();
 
         for (final BaseCriteria baseCriteria : baseCriteriaList) {
-            TupleQueryPathCreator.module(baseCriteria, firstAttribute, secondAttribute);
+            MultiSelectQueryPathCreator.module(baseCriteria, firstAttribute, secondAttribute);
         }
     }
 
@@ -456,7 +456,7 @@ public class CriteriaCreator {
         final List<BaseCriteria> baseCriteriaList = basicCriteriaElements.getBaseCriteriaList();
 
         for (final BaseCriteria baseCriteria : baseCriteriaList) {
-            TupleQueryPathCreator.module(baseCriteria, attributeName, number);
+            MultiSelectQueryPathCreator.module(baseCriteria, attributeName, number);
         }
     }
 
@@ -464,7 +464,7 @@ public class CriteriaCreator {
         final List<BaseCriteria> baseCriteriaList = basicCriteriaElements.getBaseCriteriaList();
 
         for (final BaseCriteria baseCriteria : baseCriteriaList) {
-            TupleQueryPathCreator.module(baseCriteria, number, attributeName);
+            MultiSelectQueryPathCreator.module(baseCriteria, number, attributeName);
         }
     }
 
@@ -472,7 +472,7 @@ public class CriteriaCreator {
         final List<BaseCriteria> baseCriteriaList = basicCriteriaElements.getBaseCriteriaList();
 
         for (final BaseCriteria baseCriteria : baseCriteriaList) {
-            TupleQueryPathCreator.countAttribute(baseCriteria, attributeArray);
+            MultiSelectQueryPathCreator.countAttribute(baseCriteria, attributeArray);
         }
     }
 }

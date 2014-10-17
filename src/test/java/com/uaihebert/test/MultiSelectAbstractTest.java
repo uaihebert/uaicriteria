@@ -25,7 +25,7 @@ import java.util.Vector;
 
 import static org.junit.Assert.*;
 
-public class TupleAbstractTest extends AbstractTest {
+public class MultiSelectAbstractTest extends AbstractTest {
     protected enum OpenJpaIndexToConvert {
         NONE, SECOND
     }
@@ -34,10 +34,10 @@ public class TupleAbstractTest extends AbstractTest {
         final E criteriaResult;
 
         if (isEclipselink()) {
-            final Vector resultAsVector = (Vector) uaiCriteria.getTupleResult();
+            final Vector resultAsVector = (Vector) uaiCriteria.getMultiSelectResult();
             criteriaResult = (E) resultAsVector.get(0);
         } else {
-            final List resultAsList = uaiCriteria.getTupleResult();
+            final List resultAsList = uaiCriteria.getMultiSelectResult();
             criteriaResult = (E) resultAsList.get(0);
         }
 
@@ -48,31 +48,31 @@ public class TupleAbstractTest extends AbstractTest {
         final List<Object> resultFromJPQL = jpqlHelper.getListFromJPQL(query, Object.class);
         final Vector jpqlVector = (Vector) resultFromJPQL;
 
-        assertTrue("making sure that the tuple worked", jpqlVector.size() > 1);
+        assertTrue("making sure that the multiSelect worked", jpqlVector.size() > 1);
 
-        final Vector tupleVector = (Vector) uaiCriteria.getTupleResult();
+        final Vector multiSelectVector = (Vector) uaiCriteria.getMultiSelectResult();
 
-        assertEquals("making sure that the tuple has the same value", jpqlVector.size(), tupleVector.size());
+        assertEquals("making sure that the multiSelect has the same value", jpqlVector.size(), multiSelectVector.size());
 
-        validateListResult(jpqlVector, tupleVector);
+        validateListResult(jpqlVector, multiSelectVector);
     }
 
-    protected void validateListResult(final List jpqlVector, final List tupleVector, final OpenJpaIndexToConvert... convertIndex) {
+    protected void validateListResult(final List jpqlVector, final List multiSelectVector, final OpenJpaIndexToConvert... convertIndex) {
         for (int i = 0; i < jpqlVector.size(); i++) {
             final Object[] jpqlLine = (Object[]) jpqlVector.get(i);
-            final Object[] tupleLine = (Object[]) tupleVector.get(i);
+            final Object[] multiSelectLine = (Object[]) multiSelectVector.get(i);
 
             if (isOpenJPA()) {
                 // open JPA is returning long/int values in the avg attributes
                 if (convertIndex.length == 0 || OpenJpaIndexToConvert.NONE.equals(convertIndex)) {
                     // for some reason is returning long for jpql and int for criteria
-                    assertEquals(jpqlLine[0], tupleLine[0]);
+                    assertEquals(jpqlLine[0], multiSelectLine[0]);
                     try {
                         // for jpql is returning long and criteria big decimal
-                        assertEquals(new BigDecimal(jpqlLine[0].toString()), new BigDecimal(tupleLine[0].toString()));
+                        assertEquals(new BigDecimal(jpqlLine[0].toString()), new BigDecimal(multiSelectLine[0].toString()));
                     } catch (final NumberFormatException nfe) {
                         try {
-                            assertEquals(jpqlLine[0], tupleLine[0]);
+                            assertEquals(jpqlLine[0], multiSelectLine[0]);
                         } catch (final Exception ex) {
                             fail("Could not parse query result");
                         }
@@ -81,20 +81,20 @@ public class TupleAbstractTest extends AbstractTest {
                 }
 
                 if (convertIndex.length > 0 && i == 1 && Arrays.asList(convertIndex).contains(OpenJpaIndexToConvert.SECOND)) {
-                    assertEquals(Double.valueOf(jpqlLine[1].toString()), Double.valueOf(tupleLine[1].toString()));
+                    assertEquals(Double.valueOf(jpqlLine[1].toString()), Double.valueOf(multiSelectLine[1].toString()));
                 }
             } else {
                 // for some reason the eclipslink is returning null values
-                if (jpqlLine[1] == null && tupleLine[1] == null) {
+                if (jpqlLine[1] == null && multiSelectLine[1] == null) {
                     continue;
                 }
 
                 try {
                     // for jpql is returning long and criteria big decimal
-                    assertEquals(new BigDecimal(jpqlLine[1].toString()), new BigDecimal(tupleLine[1].toString()));
+                    assertEquals(new BigDecimal(jpqlLine[1].toString()), new BigDecimal(multiSelectLine[1].toString()));
                 } catch (final NumberFormatException nfe) {
                     try {
-                        assertEquals(jpqlLine[1], tupleLine[1]);
+                        assertEquals(jpqlLine[1], multiSelectLine[1]);
                     } catch (final Exception ex) {
                         fail("Could not parse query result");
                     }
@@ -108,10 +108,10 @@ public class TupleAbstractTest extends AbstractTest {
 
         assertTrue("making sure that the sum worked", jpqlList.size() > 1);
 
-        final List tupleList = uaiCriteria.getTupleResult();
+        final List multiSelectList = uaiCriteria.getMultiSelectResult();
 
-        assertEquals("making sure that the sum has the same value", jpqlList.size(), tupleList.size());
+        assertEquals("making sure that the sum has the same value", jpqlList.size(), multiSelectList.size());
 
-        validateListResult(jpqlList, tupleList);
+        validateListResult(jpqlList, multiSelectList);
     }
 }

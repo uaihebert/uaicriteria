@@ -50,7 +50,7 @@ public class BaseCriteria<T> {
 
     private final List<Predicate> createdPredicateList = new ArrayList<Predicate>();
 
-    private final List<Expression> tupleSelectList = new ArrayList<Expression>();
+    private final List<Expression> multiSelectSelectList = new ArrayList<Expression>();
     private final List<Expression> groupByList = new ArrayList<Expression>();
 
     private final Map<Integer, List<Predicate>> orPredicateMap = new HashMap<Integer, List<Predicate>>();
@@ -305,8 +305,8 @@ public class BaseCriteria<T> {
         getCountCriteriaQuery().select(criteriaBuilder.count(root));
     }
 
-    public void setTupleSelect() {
-        addTupleMultiSelectValues();
+    public void setMultiSelectSelect() {
+        addMultiSelectMultiSelectValues();
     }
 
     private void addGroupByValues() {
@@ -314,21 +314,21 @@ public class BaseCriteria<T> {
             return;
         }
 
-        final Expression[] tupleGroupByArray = new Expression[groupByList.size()];
-        groupByList.toArray(tupleGroupByArray);
+        final Expression[] multiSelectGroupByArray = new Expression[groupByList.size()];
+        groupByList.toArray(multiSelectGroupByArray);
 
-        getCriteriaQuery().groupBy(tupleGroupByArray);
+        getCriteriaQuery().groupBy(multiSelectGroupByArray);
     }
 
-    private void addTupleMultiSelectValues() {
-        if (tupleSelectList.isEmpty()) {
-            throw new IllegalStateException("You want to extract a tuple query, but you have not added any attribute or method to the query");
+    private void addMultiSelectMultiSelectValues() {
+        if (multiSelectSelectList.isEmpty()) {
+            throw new IllegalStateException("You want to extract a multiSelect query, but you have not added any attribute or method to the query");
         }
 
-        final Selection[] tupleSelectArray = new Selection[tupleSelectList.size()];
-        tupleSelectList.toArray(tupleSelectArray);
+        final Selection[] multiSelectSelectArray = new Selection[multiSelectSelectList.size()];
+        multiSelectSelectList.toArray(multiSelectSelectArray);
 
-        getConvertedCriteriaQuery().multiselect(tupleSelectArray);
+        getConvertedCriteriaQuery().multiselect(multiSelectSelectArray);
     }
 
     private void useCountDistinctInsteadOfQueryDistinct() {
@@ -336,12 +336,12 @@ public class BaseCriteria<T> {
         getCountCriteriaQuery().select(criteriaBuilder.countDistinct(root));
     }
 
-    public void addTupleOperationExpression(final Expression tuplePredicate) {
-        tupleSelectList.add(tuplePredicate);
+    public void addMultiSelectOperationExpression(final Expression multiSelectPredicate) {
+        multiSelectSelectList.add(multiSelectPredicate);
     }
 
-    public void addTuplePathException(final Expression tuplePredicate) {
-        tupleSelectList.add(tuplePredicate);
+    public void addMultiSelectPathException(final Expression multiSelectPredicate) {
+        multiSelectSelectList.add(multiSelectPredicate);
     }
 
     public void groupBy(final Path attributeToGroup) {

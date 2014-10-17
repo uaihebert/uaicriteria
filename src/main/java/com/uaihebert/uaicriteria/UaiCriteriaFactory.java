@@ -30,7 +30,7 @@ public final class UaiCriteriaFactory {
         return createQueryCriteria(entityManager, classToUse, null, QueryType.REGULAR);
     }
 
-    public static <T> UaiCriteria<T> createTupleCriteria(final EntityManager entityManager, final Class<T> classToUse) {
+    public static <T> UaiCriteria<T> createMultiSelectCriteria(final EntityManager entityManager, final Class<T> classToUse) {
         return createQueryCriteria(entityManager, classToUse, null, QueryType.TUPLE);
     }
 
@@ -38,7 +38,7 @@ public final class UaiCriteriaFactory {
         return createQueryCriteria(entityManager, classToUse, uaiCTO, QueryType.REGULAR);
     }
 
-    public static <T> UaiCriteria<T> createTupleCriteria(final EntityManager entityManager, final Class<T> classToUse, final UaiCriteria<T> uaiCTO) {
+    public static <T> UaiCriteria<T> createMultiSelectCriteria(final EntityManager entityManager, final Class<T> classToUse, final UaiCriteria<T> uaiCTO) {
         return createQueryCriteria(entityManager, classToUse, uaiCTO, QueryType.TUPLE);
     }
 

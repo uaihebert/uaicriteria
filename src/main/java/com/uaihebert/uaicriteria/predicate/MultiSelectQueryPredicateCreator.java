@@ -19,7 +19,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Path;
 
-public final class TupleQueryPredicateCreator extends AbstractPredicateCreator {
+public final class MultiSelectQueryPredicateCreator extends AbstractPredicateCreator {
 
     public static Expression sum(final CriteriaBuilder criteriaBuilder, final Path<Number> path) {
         return criteriaBuilder.sum(path);

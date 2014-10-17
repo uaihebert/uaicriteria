@@ -32,7 +32,7 @@ public class FakeUaiCriteriaCTOImp<T> implements UaiCriteria<T> {
     }
 
     @Override
-    public List getTupleResult() {
+    public List getMultiSelectResult() {
         return null;
     }
 
@@ -412,7 +412,7 @@ public class FakeUaiCriteriaCTOImp<T> implements UaiCriteria<T> {
     }
 
     @Override
-    public UaiCriteria<T> addTupleSelectAttribute(final String... attributeName) {
+    public UaiCriteria<T> addMultiSelectAttribute(final String... attributeName) {
         return null;
     }
 

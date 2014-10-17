@@ -63,8 +63,8 @@ public class UaiCriteriaImp<T> implements UaiCriteria<T> {
     }
 
     @Override
-    public List getTupleResult() {
-        final TypedQuery<Object> query = basicCriteriaElements.getTupleQuery();
+    public List getMultiSelectResult() {
+        final TypedQuery<Object> query = basicCriteriaElements.getMultiSelectQuery();
 
         return query.getResultList();
     }
@@ -549,8 +549,8 @@ public class UaiCriteriaImp<T> implements UaiCriteria<T> {
     }
 
     @Override
-    public UaiCriteria<T> addTupleSelectAttribute(final String... attributeNameArray) {
-        criteriaCreator.addTupleSelectAttribute(attributeNameArray);
+    public UaiCriteria<T> addMultiSelectAttribute(final String... attributeNameArray) {
+        criteriaCreator.addMultiSelectSelectAttribute(attributeNameArray);
         return this;
     }
 

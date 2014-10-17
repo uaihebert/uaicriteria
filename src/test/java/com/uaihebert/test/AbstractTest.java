@@ -73,16 +73,16 @@ public abstract class AbstractTest {
         return UaiCriteriaFactory.createQueryCriteria(entityManager, classToUse);
     }
 
-    protected <T> UaiCriteria<T> createTupleCriteria(final Class<T> classToUse) {
-        return UaiCriteriaFactory.createTupleCriteria(entityManager, classToUse);
+    protected <T> UaiCriteria<T> createMultiSelectCriteria(final Class<T> classToUse) {
+        return UaiCriteriaFactory.createMultiSelectCriteria(entityManager, classToUse);
     }
 
     protected <T> UaiCriteria<T> createCriteria(final Class<T> classToUse, final UaiCriteria<T> uaiCTO) {
         return UaiCriteriaFactory.createQueryCriteria(entityManager, classToUse, uaiCTO);
     }
 
-    protected <T> UaiCriteria<T> createTupleCriteria(final Class<T> classToUse, final UaiCriteria<T> uaiCTO) {
-        return UaiCriteriaFactory.createTupleCriteria(entityManager, classToUse, uaiCTO);
+    protected <T> UaiCriteria<T> createMultiSelectCriteria(final Class<T> classToUse, final UaiCriteria<T> uaiCTO) {
+        return UaiCriteriaFactory.createMultiSelectCriteria(entityManager, classToUse, uaiCTO);
     }
 
     protected Date getFormattedDate(final String date) {

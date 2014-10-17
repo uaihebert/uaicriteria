@@ -13,14 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * */
-package com.uaihebert.test.uaicriteria.tuple;
+package com.uaihebert.test.uaicriteria.multiSelect;
 
 import com.uaihebert.model.test.RegularEntityOne;
-import com.uaihebert.test.TupleAbstractTest;
+import com.uaihebert.test.MultiSelectAbstractTest;
 import com.uaihebert.uaicriteria.UaiCriteria;
 import org.junit.Test;
 
-public class ModuleTupleTest extends TupleAbstractTest {
+public class ModuleMultiSelectTest extends MultiSelectAbstractTest {
 
     @Test
     public void isMethodInvokedWithTwoParameters() {
@@ -30,8 +30,8 @@ public class ModuleTupleTest extends TupleAbstractTest {
 
         final String query = "select r.id, mod(r.id, r.integerAttributeOne) from RegularEntityOne r";
 
-        final UaiCriteria<RegularEntityOne> uaiCriteria = createTupleCriteria(RegularEntityOne.class);
-        uaiCriteria.addTupleSelectAttribute("id").module("id", "integerAttributeOne");
+        final UaiCriteria<RegularEntityOne> uaiCriteria = createMultiSelectCriteria(RegularEntityOne.class);
+        uaiCriteria.addMultiSelectAttribute("id").module("id", "integerAttributeOne");
 
         if (isEclipselink()) {
             validateResultWithVector(query, uaiCriteria);
@@ -42,7 +42,7 @@ public class ModuleTupleTest extends TupleAbstractTest {
     }
 
     @Test
-    public void isTupleWorkingWithSeveralAttributesAndFunction() {
+    public void isMultiSelectWorkingWithSeveralAttributesAndFunction() {
         if (isBatoo()) {
             return;
         }
@@ -50,12 +50,12 @@ public class ModuleTupleTest extends TupleAbstractTest {
         final String query = "select r.id, mod(r.id, r.integerAttributeOne), r.stringAttribute, r.floatAttributeOne, " +
                 "r.dateAttributeTwo from RegularEntityOne r ";
 
-        final UaiCriteria<RegularEntityOne> uaiCriteria = createTupleCriteria(RegularEntityOne.class);
-        uaiCriteria.addTupleSelectAttribute("id")
+        final UaiCriteria<RegularEntityOne> uaiCriteria = createMultiSelectCriteria(RegularEntityOne.class);
+        uaiCriteria.addMultiSelectAttribute("id")
                 .module("id", "integerAttributeOne")
-                .addTupleSelectAttribute("stringAttribute")
-                .addTupleSelectAttribute("floatAttributeOne")
-                .addTupleSelectAttribute("dateAttributeTwo");
+                .addMultiSelectAttribute("stringAttribute")
+                .addMultiSelectAttribute("floatAttributeOne")
+                .addMultiSelectAttribute("dateAttributeTwo");
 
         if (isEclipselink()) {
             validateResultWithVector(query, uaiCriteria);
@@ -74,11 +74,11 @@ public class ModuleTupleTest extends TupleAbstractTest {
         final String query = "select r.id, mod(r.id, 10), r.stringAttribute, r.floatAttributeOne, " +
                 "r.dateAttributeTwo from RegularEntityOne r ";
 
-        final UaiCriteria<RegularEntityOne> uaiCriteria = createTupleCriteria(RegularEntityOne.class);
-        uaiCriteria.addTupleSelectAttribute("id")
+        final UaiCriteria<RegularEntityOne> uaiCriteria = createMultiSelectCriteria(RegularEntityOne.class);
+        uaiCriteria.addMultiSelectAttribute("id")
                 .module("id", 10)
-                .addTupleSelectAttribute("stringAttribute", "floatAttributeOne")
-                .addTupleSelectAttribute("dateAttributeTwo");
+                .addMultiSelectAttribute("stringAttribute", "floatAttributeOne")
+                .addMultiSelectAttribute("dateAttributeTwo");
 
         if (isEclipselink()) {
             validateResultWithVector(query, uaiCriteria);
@@ -97,11 +97,11 @@ public class ModuleTupleTest extends TupleAbstractTest {
         final String query = "select r.id, mod(10, r.id), r.stringAttribute, r.floatAttributeOne, " +
                 "r.dateAttributeTwo from RegularEntityOne r ";
 
-        final UaiCriteria<RegularEntityOne> uaiCriteria = createTupleCriteria(RegularEntityOne.class);
-        uaiCriteria.addTupleSelectAttribute("id")
+        final UaiCriteria<RegularEntityOne> uaiCriteria = createMultiSelectCriteria(RegularEntityOne.class);
+        uaiCriteria.addMultiSelectAttribute("id")
                 .module(10, "id")
-                .addTupleSelectAttribute("stringAttribute", "floatAttributeOne")
-                .addTupleSelectAttribute("dateAttributeTwo");
+                .addMultiSelectAttribute("stringAttribute", "floatAttributeOne")
+                .addMultiSelectAttribute("dateAttributeTwo");
 
         if (isEclipselink()) {
             validateResultWithVector(query, uaiCriteria);

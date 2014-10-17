@@ -16,30 +16,30 @@
 package com.uaihebert.uaicriteria.path;
 
 import com.uaihebert.uaicriteria.base.element.BaseCriteria;
-import com.uaihebert.uaicriteria.predicate.TupleQueryPredicateCreator;
+import com.uaihebert.uaicriteria.predicate.MultiSelectQueryPredicateCreator;
 
 import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Path;
 
-public final class TupleQueryPathCreator {
+public final class MultiSelectQueryPathCreator {
 
-    private TupleQueryPathCreator() {
+    private MultiSelectQueryPathCreator() {
     }
 
     public static void sum(final BaseCriteria baseCriteria, final String... attributeNameArray) {
         for (final String attributeName : attributeNameArray) {
             final Path path = PathHelper.extractPath(baseCriteria, attributeName);
 
-            final Expression sumPredicate = TupleQueryPredicateCreator.sum(baseCriteria.getCriteriaBuilder(), path);
+            final Expression sumPredicate = MultiSelectQueryPredicateCreator.sum(baseCriteria.getCriteriaBuilder(), path);
 
-            baseCriteria.addTupleOperationExpression(sumPredicate);
+            baseCriteria.addMultiSelectOperationExpression(sumPredicate);
         }
     }
 
-    public static void addTupleSelectAttribute(final BaseCriteria baseCriteria, final String... attributeNameArray) {
+    public static void addMultiSelectSelectAttribute(final BaseCriteria baseCriteria, final String... attributeNameArray) {
         for (final String attributeName : attributeNameArray) {
             final Path path = PathHelper.extractPath(baseCriteria, attributeName);
-            baseCriteria.addTuplePathException(path);
+            baseCriteria.addMultiSelectPathException(path);
         }
     }
 
@@ -47,9 +47,9 @@ public final class TupleQueryPathCreator {
         for (final String attributeName : attributeNameArray) {
             final Path path = PathHelper.extractPath(baseCriteria, attributeName);
 
-            final Expression avgPredicate = TupleQueryPredicateCreator.avg(baseCriteria.getCriteriaBuilder(), path);
+            final Expression avgPredicate = MultiSelectQueryPredicateCreator.avg(baseCriteria.getCriteriaBuilder(), path);
 
-            baseCriteria.addTupleOperationExpression(avgPredicate);
+            baseCriteria.addMultiSelectOperationExpression(avgPredicate);
         }
     }
 
@@ -57,26 +57,26 @@ public final class TupleQueryPathCreator {
         for (final String attributeName : attributeNameArray) {
             final Path path = PathHelper.extractPath(baseCriteria, attributeName);
 
-            final Expression squarePredicate = TupleQueryPredicateCreator.square(baseCriteria.getCriteriaBuilder(), path);
+            final Expression squarePredicate = MultiSelectQueryPredicateCreator.square(baseCriteria.getCriteriaBuilder(), path);
 
-            baseCriteria.addTupleOperationExpression(squarePredicate);
+            baseCriteria.addMultiSelectOperationExpression(squarePredicate);
         }
     }
 
     public static <N extends Number> void sum(final BaseCriteria baseCriteria, final String attributeName, final N number) {
         final Path path = PathHelper.extractPath(baseCriteria, attributeName);
 
-        final Expression sumPredicate = TupleQueryPredicateCreator.sum(baseCriteria.getCriteriaBuilder(), path, number);
+        final Expression sumPredicate = MultiSelectQueryPredicateCreator.sum(baseCriteria.getCriteriaBuilder(), path, number);
 
-        baseCriteria.addTupleOperationExpression(sumPredicate);
+        baseCriteria.addMultiSelectOperationExpression(sumPredicate);
     }
 
     public static <N extends Number> void sum(final BaseCriteria baseCriteria, final N number, final String attributeName) {
         final Path path = PathHelper.extractPath(baseCriteria, attributeName);
 
-        final Expression sumPredicate = TupleQueryPredicateCreator.sum(baseCriteria.getCriteriaBuilder(), number, path);
+        final Expression sumPredicate = MultiSelectQueryPredicateCreator.sum(baseCriteria.getCriteriaBuilder(), number, path);
 
-        baseCriteria.addTupleOperationExpression(sumPredicate);
+        baseCriteria.addMultiSelectOperationExpression(sumPredicate);
     }
 
     public static void groupBy(final BaseCriteria baseCriteria, final String[] attributeNameArray) {
@@ -90,109 +90,109 @@ public final class TupleQueryPathCreator {
         final Path firstPath = PathHelper.extractPath(baseCriteria, firstAttribute);
         final Path secondPath = PathHelper.extractPath(baseCriteria, secondAttribute);
 
-        final Expression sumPredicate = TupleQueryPredicateCreator.diff(baseCriteria.getCriteriaBuilder(), firstPath, secondPath);
+        final Expression sumPredicate = MultiSelectQueryPredicateCreator.diff(baseCriteria.getCriteriaBuilder(), firstPath, secondPath);
 
-        baseCriteria.addTupleOperationExpression(sumPredicate);
+        baseCriteria.addMultiSelectOperationExpression(sumPredicate);
     }
 
     public static <N extends Number> void diff(final BaseCriteria baseCriteria, final String attributeName, final N number) {
         final Path path = PathHelper.extractPath(baseCriteria, attributeName);
 
-        final Expression sumPredicate = TupleQueryPredicateCreator.diff(baseCriteria.getCriteriaBuilder(), path, number);
+        final Expression sumPredicate = MultiSelectQueryPredicateCreator.diff(baseCriteria.getCriteriaBuilder(), path, number);
 
-        baseCriteria.addTupleOperationExpression(sumPredicate);
+        baseCriteria.addMultiSelectOperationExpression(sumPredicate);
     }
 
     public static <N extends Number> void diff(final BaseCriteria baseCriteria, final N number, final String attributeName) {
         final Path path = PathHelper.extractPath(baseCriteria, attributeName);
 
-        final Expression sumPredicate = TupleQueryPredicateCreator.diff(baseCriteria.getCriteriaBuilder(), number, path);
+        final Expression sumPredicate = MultiSelectQueryPredicateCreator.diff(baseCriteria.getCriteriaBuilder(), number, path);
 
-        baseCriteria.addTupleOperationExpression(sumPredicate);
+        baseCriteria.addMultiSelectOperationExpression(sumPredicate);
     }
 
     public static void multiply(final BaseCriteria baseCriteria, final String firstAttribute, final String secondAttribute) {
         final Path firstPath = PathHelper.extractPath(baseCriteria, firstAttribute);
         final Path secondPath = PathHelper.extractPath(baseCriteria, secondAttribute);
 
-        final Expression sumPredicate = TupleQueryPredicateCreator.multiply(baseCriteria.getCriteriaBuilder(), firstPath, secondPath);
+        final Expression sumPredicate = MultiSelectQueryPredicateCreator.multiply(baseCriteria.getCriteriaBuilder(), firstPath, secondPath);
 
-        baseCriteria.addTupleOperationExpression(sumPredicate);
+        baseCriteria.addMultiSelectOperationExpression(sumPredicate);
     }
 
     public static <N extends Number> void multiply(final BaseCriteria baseCriteria, final String attributeName, final N number) {
         final Path path = PathHelper.extractPath(baseCriteria, attributeName);
 
-        final Expression sumPredicate = TupleQueryPredicateCreator.multiply(baseCriteria.getCriteriaBuilder(), path, number);
+        final Expression sumPredicate = MultiSelectQueryPredicateCreator.multiply(baseCriteria.getCriteriaBuilder(), path, number);
 
-        baseCriteria.addTupleOperationExpression(sumPredicate);
+        baseCriteria.addMultiSelectOperationExpression(sumPredicate);
     }
 
     public static <N extends Number> void multiply(final BaseCriteria baseCriteria, final N number, final String attributeName) {
         final Path path = PathHelper.extractPath(baseCriteria, attributeName);
 
-        final Expression sumPredicate = TupleQueryPredicateCreator.multiply(baseCriteria.getCriteriaBuilder(), number, path);
+        final Expression sumPredicate = MultiSelectQueryPredicateCreator.multiply(baseCriteria.getCriteriaBuilder(), number, path);
 
-        baseCriteria.addTupleOperationExpression(sumPredicate);
+        baseCriteria.addMultiSelectOperationExpression(sumPredicate);
     }
 
     public static void divide(final BaseCriteria baseCriteria, final String firstAttribute, final String secondAttribute) {
         final Path firstPath = PathHelper.extractPath(baseCriteria, firstAttribute);
         final Path secondPath = PathHelper.extractPath(baseCriteria, secondAttribute);
 
-        final Expression sumPredicate = TupleQueryPredicateCreator.divide(baseCriteria.getCriteriaBuilder(), firstPath, secondPath);
+        final Expression sumPredicate = MultiSelectQueryPredicateCreator.divide(baseCriteria.getCriteriaBuilder(), firstPath, secondPath);
 
-        baseCriteria.addTupleOperationExpression(sumPredicate);
+        baseCriteria.addMultiSelectOperationExpression(sumPredicate);
     }
 
     public static <N extends Number> void divide(final BaseCriteria baseCriteria, final String attributeName, final N number) {
         final Path path = PathHelper.extractPath(baseCriteria, attributeName);
 
-        final Expression sumPredicate = TupleQueryPredicateCreator.divide(baseCriteria.getCriteriaBuilder(), path, number);
+        final Expression sumPredicate = MultiSelectQueryPredicateCreator.divide(baseCriteria.getCriteriaBuilder(), path, number);
 
-        baseCriteria.addTupleOperationExpression(sumPredicate);
+        baseCriteria.addMultiSelectOperationExpression(sumPredicate);
     }
 
     public static <N extends Number> void divide(final BaseCriteria baseCriteria, final N number, final String attributeName) {
         final Path path = PathHelper.extractPath(baseCriteria, attributeName);
 
-        final Expression sumPredicate = TupleQueryPredicateCreator.divide(baseCriteria.getCriteriaBuilder(), number, path);
+        final Expression sumPredicate = MultiSelectQueryPredicateCreator.divide(baseCriteria.getCriteriaBuilder(), number, path);
 
-        baseCriteria.addTupleOperationExpression(sumPredicate);
+        baseCriteria.addMultiSelectOperationExpression(sumPredicate);
     }
 
     public static void module(final BaseCriteria baseCriteria, final String firstAttribute, final String secondAttribute) {
         final Path firstPath = PathHelper.extractPath(baseCriteria, firstAttribute);
         final Path secondPath = PathHelper.extractPath(baseCriteria, secondAttribute);
 
-        final Expression sumPredicate = TupleQueryPredicateCreator.module(baseCriteria.getCriteriaBuilder(), firstPath, secondPath);
+        final Expression sumPredicate = MultiSelectQueryPredicateCreator.module(baseCriteria.getCriteriaBuilder(), firstPath, secondPath);
 
-        baseCriteria.addTupleOperationExpression(sumPredicate);
+        baseCriteria.addMultiSelectOperationExpression(sumPredicate);
     }
 
     public static void module(final BaseCriteria baseCriteria, final String attributeName, final Integer number) {
         final Path path = PathHelper.extractPath(baseCriteria, attributeName);
 
-        final Expression sumPredicate = TupleQueryPredicateCreator.module(baseCriteria.getCriteriaBuilder(), path, number);
+        final Expression sumPredicate = MultiSelectQueryPredicateCreator.module(baseCriteria.getCriteriaBuilder(), path, number);
 
-        baseCriteria.addTupleOperationExpression(sumPredicate);
+        baseCriteria.addMultiSelectOperationExpression(sumPredicate);
     }
 
     public static void module(final BaseCriteria baseCriteria, final Integer number, final String attributeName) {
         final Path path = PathHelper.extractPath(baseCriteria, attributeName);
 
-        final Expression sumPredicate = TupleQueryPredicateCreator.module(baseCriteria.getCriteriaBuilder(), number, path);
+        final Expression sumPredicate = MultiSelectQueryPredicateCreator.module(baseCriteria.getCriteriaBuilder(), number, path);
 
-        baseCriteria.addTupleOperationExpression(sumPredicate);
+        baseCriteria.addMultiSelectOperationExpression(sumPredicate);
     }
 
     public static void countAttribute(final BaseCriteria baseCriteria, final String[] attributeArray) {
         for (final String attributeName : attributeArray) {
             final Path path = PathHelper.extractPath(baseCriteria, attributeName);
 
-            final Expression countPredicate = TupleQueryPredicateCreator.count(baseCriteria.getCriteriaBuilder(), path);
+            final Expression countPredicate = MultiSelectQueryPredicateCreator.count(baseCriteria.getCriteriaBuilder(), path);
 
-            baseCriteria.addTupleOperationExpression(countPredicate);
+            baseCriteria.addMultiSelectOperationExpression(countPredicate);
         }
     }
 }

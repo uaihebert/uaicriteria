@@ -13,17 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * */
-package com.uaihebert.test.cto.tuple;
+package com.uaihebert.test.cto.multiSelect;
 
 import com.uaihebert.model.test.RegularEntityOne;
-import com.uaihebert.test.TupleAbstractTest;
+import com.uaihebert.test.MultiSelectAbstractTest;
 import com.uaihebert.uaicriteria.UaiCriteria;
 import com.uaihebert.uaicriteria.UaiCriteriaFactory;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class SumTupleCTOTest extends TupleAbstractTest {
+public class SumMultiSelectCTOTest extends MultiSelectAbstractTest {
 
     @Test
     public void isSumMethodInvokedWithOneParameterOnly() {
@@ -31,7 +31,7 @@ public class SumTupleCTOTest extends TupleAbstractTest {
             return;
         }
 
-        final UaiCriteria<RegularEntityOne> uaiCriteria = createTupleCriteria(RegularEntityOne.class);
+        final UaiCriteria<RegularEntityOne> uaiCriteria = createMultiSelectCriteria(RegularEntityOne.class);
         uaiCriteria.sum("id");
 
         final Long uaiCriteriaSum = extractResult(uaiCriteria, Long.class);
@@ -39,7 +39,7 @@ public class SumTupleCTOTest extends TupleAbstractTest {
         final UaiCriteria<RegularEntityOne> cto = UaiCriteriaFactory.createQueryUaiCTO();
         cto.sum("id");
 
-        final UaiCriteria<RegularEntityOne> uaiCriteriaCTO = createTupleCriteria(RegularEntityOne.class, cto);
+        final UaiCriteria<RegularEntityOne> uaiCriteriaCTO = createMultiSelectCriteria(RegularEntityOne.class, cto);
 
         final Long uaiCTOSum = extractResult(uaiCriteriaCTO, Long.class);
 
@@ -52,38 +52,38 @@ public class SumTupleCTOTest extends TupleAbstractTest {
             return;
         }
 
-        final UaiCriteria<RegularEntityOne> uaiCriteria = createTupleCriteria(RegularEntityOne.class);
-        uaiCriteria.addTupleSelectAttribute("id").sum("id");
+        final UaiCriteria<RegularEntityOne> uaiCriteria = createMultiSelectCriteria(RegularEntityOne.class);
+        uaiCriteria.addMultiSelectAttribute("id").sum("id");
         uaiCriteria.groupBy("id");
 
         final UaiCriteria<RegularEntityOne> cto = UaiCriteriaFactory.createQueryUaiCTO();
-        cto.addTupleSelectAttribute("id").sum("id");
+        cto.addMultiSelectAttribute("id").sum("id");
         cto.groupBy("id");
 
-        final UaiCriteria<RegularEntityOne> uaiCriteriaCTO = createTupleCriteria(RegularEntityOne.class, cto);
+        final UaiCriteria<RegularEntityOne> uaiCriteriaCTO = createMultiSelectCriteria(RegularEntityOne.class, cto);
 
-        validateListResult(uaiCriteria.getTupleResult(), uaiCriteriaCTO.getTupleResult());
+        validateListResult(uaiCriteria.getMultiSelectResult(), uaiCriteriaCTO.getMultiSelectResult());
     }
 
     @Test
-    public void isTupleWorkingWithSeveralGroupByAttributesAndSumFunction() {
+    public void isMultiSelectWorkingWithSeveralGroupByAttributesAndSumFunction() {
         if (isBatoo()) {
             return;
         }
 
-        final UaiCriteria<RegularEntityOne> uaiCriteria = createTupleCriteria(RegularEntityOne.class);
-        uaiCriteria.addTupleSelectAttribute("id", "stringAttribute", "floatAttributeOne", "dateAttributeTwo");
+        final UaiCriteria<RegularEntityOne> uaiCriteria = createMultiSelectCriteria(RegularEntityOne.class);
+        uaiCriteria.addMultiSelectAttribute("id", "stringAttribute", "floatAttributeOne", "dateAttributeTwo");
         uaiCriteria.sum("id");
         uaiCriteria.groupBy("id", "stringAttribute", "floatAttributeOne", "dateAttributeTwo");
 
         final UaiCriteria<RegularEntityOne> cto = UaiCriteriaFactory.createQueryUaiCTO();
-        cto.addTupleSelectAttribute("id", "stringAttribute", "floatAttributeOne", "dateAttributeTwo");
+        cto.addMultiSelectAttribute("id", "stringAttribute", "floatAttributeOne", "dateAttributeTwo");
         cto.sum("id");
         cto.groupBy("id", "stringAttribute", "floatAttributeOne", "dateAttributeTwo");
 
-        final UaiCriteria<RegularEntityOne> uaiCriteriaCTO = createTupleCriteria(RegularEntityOne.class, cto);
+        final UaiCriteria<RegularEntityOne> uaiCriteriaCTO = createMultiSelectCriteria(RegularEntityOne.class, cto);
 
-        validateListResult(uaiCriteria.getTupleResult(), uaiCriteriaCTO.getTupleResult());
+        validateListResult(uaiCriteria.getMultiSelectResult(), uaiCriteriaCTO.getMultiSelectResult());
     }
 
     @Test
@@ -92,19 +92,19 @@ public class SumTupleCTOTest extends TupleAbstractTest {
             return;
         }
 
-        final UaiCriteria<RegularEntityOne> uaiCriteria = createTupleCriteria(RegularEntityOne.class);
-        uaiCriteria.addTupleSelectAttribute("id", "stringAttribute", "floatAttributeOne", "dateAttributeTwo");
+        final UaiCriteria<RegularEntityOne> uaiCriteria = createMultiSelectCriteria(RegularEntityOne.class);
+        uaiCriteria.addMultiSelectAttribute("id", "stringAttribute", "floatAttributeOne", "dateAttributeTwo");
         uaiCriteria.sum("id", 10);
         uaiCriteria.groupBy("id", "stringAttribute", "floatAttributeOne", "dateAttributeTwo");
 
         final UaiCriteria<RegularEntityOne> cto = UaiCriteriaFactory.createQueryUaiCTO();
-        cto.addTupleSelectAttribute("id", "stringAttribute", "floatAttributeOne", "dateAttributeTwo");
+        cto.addMultiSelectAttribute("id", "stringAttribute", "floatAttributeOne", "dateAttributeTwo");
         cto.sum("id", 10);
         cto.groupBy("id", "stringAttribute", "floatAttributeOne", "dateAttributeTwo");
 
-        final UaiCriteria<RegularEntityOne> uaiCriteriaCTO = createTupleCriteria(RegularEntityOne.class, cto);
+        final UaiCriteria<RegularEntityOne> uaiCriteriaCTO = createMultiSelectCriteria(RegularEntityOne.class, cto);
 
-        validateListResult(uaiCriteria.getTupleResult(), uaiCriteriaCTO.getTupleResult());
+        validateListResult(uaiCriteria.getMultiSelectResult(), uaiCriteriaCTO.getMultiSelectResult());
     }
 
     @Test
@@ -113,18 +113,18 @@ public class SumTupleCTOTest extends TupleAbstractTest {
             return;
         }
 
-        final UaiCriteria<RegularEntityOne> uaiCriteria = createTupleCriteria(RegularEntityOne.class);
-        uaiCriteria.addTupleSelectAttribute("id", "stringAttribute", "floatAttributeOne", "dateAttributeTwo");
+        final UaiCriteria<RegularEntityOne> uaiCriteria = createMultiSelectCriteria(RegularEntityOne.class);
+        uaiCriteria.addMultiSelectAttribute("id", "stringAttribute", "floatAttributeOne", "dateAttributeTwo");
         uaiCriteria.sum(10, "id");
         uaiCriteria.groupBy("id", "stringAttribute", "floatAttributeOne", "dateAttributeTwo");
 
         final UaiCriteria<RegularEntityOne> cto = UaiCriteriaFactory.createQueryUaiCTO();
-        cto.addTupleSelectAttribute("id", "stringAttribute", "floatAttributeOne", "dateAttributeTwo");
+        cto.addMultiSelectAttribute("id", "stringAttribute", "floatAttributeOne", "dateAttributeTwo");
         cto.sum(10, "id");
         cto.groupBy("id", "stringAttribute", "floatAttributeOne", "dateAttributeTwo");
 
-        final UaiCriteria<RegularEntityOne> uaiCriteriaCTO = createTupleCriteria(RegularEntityOne.class, cto);
+        final UaiCriteria<RegularEntityOne> uaiCriteriaCTO = createMultiSelectCriteria(RegularEntityOne.class, cto);
 
-        validateListResult(uaiCriteria.getTupleResult(), uaiCriteriaCTO.getTupleResult());
+        validateListResult(uaiCriteria.getMultiSelectResult(), uaiCriteriaCTO.getMultiSelectResult());
     }
 }

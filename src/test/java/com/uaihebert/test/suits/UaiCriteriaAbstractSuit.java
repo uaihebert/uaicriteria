@@ -42,16 +42,16 @@ import com.uaihebert.test.cto.MethodsNotEmptyCTOTest;
 import com.uaihebert.test.cto.MethodsNotNullCTOTest;
 import com.uaihebert.test.cto.MethodsNullCTOTest;
 import com.uaihebert.test.cto.MethodsOrCTOTest;
+import com.uaihebert.test.cto.multiSelect.AverageMultiSelectCTOTest;
+import com.uaihebert.test.cto.multiSelect.BasicMultiSelectCTOTest;
+import com.uaihebert.test.cto.multiSelect.CountMultiSelectCTOTest;
+import com.uaihebert.test.cto.multiSelect.DiffMultiSelectCTOTest;
+import com.uaihebert.test.cto.multiSelect.DivideMultiSelectCTOTest;
+import com.uaihebert.test.cto.multiSelect.ModuleMultiSelectCTOTest;
+import com.uaihebert.test.cto.multiSelect.MultiplyMultiSelectCTOTest;
+import com.uaihebert.test.cto.multiSelect.SquareMultiSelectCTOTest;
+import com.uaihebert.test.cto.multiSelect.SumMultiSelectCTOTest;
 import com.uaihebert.test.cto.subquery.SubQueryCTOTest;
-import com.uaihebert.test.cto.tuple.AverageTupleCTOTest;
-import com.uaihebert.test.cto.tuple.BasicTupleCTOTest;
-import com.uaihebert.test.cto.tuple.CountTupleCTOTest;
-import com.uaihebert.test.cto.tuple.DiffTupleCTOTest;
-import com.uaihebert.test.cto.tuple.DivideTupleCTOTest;
-import com.uaihebert.test.cto.tuple.ModuleTupleCTOTest;
-import com.uaihebert.test.cto.tuple.MultiplyTupleCTOTest;
-import com.uaihebert.test.cto.tuple.SquareTupleCTOTest;
-import com.uaihebert.test.cto.tuple.SumTupleCTOTest;
 import com.uaihebert.test.uaicriteria.BasicTest;
 import com.uaihebert.test.uaicriteria.CommonTestsBigDecimalTestImp;
 import com.uaihebert.test.uaicriteria.CommonTestsCalendarTestImp;
@@ -78,6 +78,15 @@ import com.uaihebert.test.uaicriteria.MethodsNullTest;
 import com.uaihebert.test.uaicriteria.MethodsOrTest;
 import com.uaihebert.test.uaicriteria.PrivateConstructorTest;
 import com.uaihebert.test.uaicriteria.RegularQueryPathCreatorTest;
+import com.uaihebert.test.uaicriteria.multiSelect.AverageMultiSelectTest;
+import com.uaihebert.test.uaicriteria.multiSelect.BasicMultiSelectTest;
+import com.uaihebert.test.uaicriteria.multiSelect.CountMultiSelectTest;
+import com.uaihebert.test.uaicriteria.multiSelect.DiffMultiSelectTest;
+import com.uaihebert.test.uaicriteria.multiSelect.DivideMultiSelectTest;
+import com.uaihebert.test.uaicriteria.multiSelect.ModuleMultiSelectTest;
+import com.uaihebert.test.uaicriteria.multiSelect.MultiplyMultiSelectTest;
+import com.uaihebert.test.uaicriteria.multiSelect.SquareMultiSelectTest;
+import com.uaihebert.test.uaicriteria.multiSelect.SumMultiSelectTest;
 import com.uaihebert.test.uaicriteria.subquery.BasicSubQueryTest;
 import com.uaihebert.test.uaicriteria.subquery.BetweenSubQueryTest;
 import com.uaihebert.test.uaicriteria.subquery.ComparisonSubQueryTest;
@@ -85,19 +94,10 @@ import com.uaihebert.test.uaicriteria.subquery.DistinctSubQueryTest;
 import com.uaihebert.test.uaicriteria.subquery.ExceptionSubQueryTest;
 import com.uaihebert.test.uaicriteria.subquery.JoinSubQueryTest;
 import com.uaihebert.test.uaicriteria.subquery.MemberOfSubQueryTest;
+import com.uaihebert.test.uaicriteria.subquery.MultiSelectNotAvailableSubQueryTest;
 import com.uaihebert.test.uaicriteria.subquery.NullEmptySubQueryTest;
 import com.uaihebert.test.uaicriteria.subquery.OrSubQueryTest;
 import com.uaihebert.test.uaicriteria.subquery.StringSubQueryTest;
-import com.uaihebert.test.uaicriteria.subquery.TupleNotAvailableSubQueryTest;
-import com.uaihebert.test.uaicriteria.tuple.AverageTupleTest;
-import com.uaihebert.test.uaicriteria.tuple.BasicTupleTest;
-import com.uaihebert.test.uaicriteria.tuple.CountTupleTest;
-import com.uaihebert.test.uaicriteria.tuple.DiffTupleTest;
-import com.uaihebert.test.uaicriteria.tuple.DivideTupleTest;
-import com.uaihebert.test.uaicriteria.tuple.ModuleTupleTest;
-import com.uaihebert.test.uaicriteria.tuple.MultiplyTupleTest;
-import com.uaihebert.test.uaicriteria.tuple.SquareTupleTest;
-import com.uaihebert.test.uaicriteria.tuple.SumTupleTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
@@ -155,24 +155,24 @@ import org.junit.runners.Suite;
         MemberOfTest.class,
         EnumTest.class,
         EnumCTOTest.class,
-        SumTupleTest.class,
-        SumTupleCTOTest.class,
-        AverageTupleTest.class,
-        AverageTupleCTOTest.class,
-        DiffTupleTest.class,
-        DiffTupleCTOTest.class,
-        DivideTupleTest.class,
-        DivideTupleCTOTest.class,
-        MultiplyTupleTest.class,
-        MultiplyTupleCTOTest.class,
-        ModuleTupleTest.class,
-        ModuleTupleCTOTest.class,
-        BasicTupleTest.class,
-        BasicTupleCTOTest.class,
-        CountTupleTest.class,
-        CountTupleCTOTest.class,
-        SquareTupleTest.class,
-        SquareTupleCTOTest.class,
+        SumMultiSelectTest.class,
+        SumMultiSelectCTOTest.class,
+        AverageMultiSelectTest.class,
+        AverageMultiSelectCTOTest.class,
+        DiffMultiSelectTest.class,
+        DiffMultiSelectCTOTest.class,
+        DivideMultiSelectTest.class,
+        DivideMultiSelectCTOTest.class,
+        MultiplyMultiSelectTest.class,
+        MultiplyMultiSelectCTOTest.class,
+        ModuleMultiSelectTest.class,
+        ModuleMultiSelectCTOTest.class,
+        BasicMultiSelectTest.class,
+        BasicMultiSelectCTOTest.class,
+        CountMultiSelectTest.class,
+        CountMultiSelectCTOTest.class,
+        SquareMultiSelectTest.class,
+        SquareMultiSelectCTOTest.class,
         BasicSubQueryTest.class,
         ComparisonSubQueryTest.class,
         OrSubQueryTest.class,
@@ -183,7 +183,7 @@ import org.junit.runners.Suite;
         NullEmptySubQueryTest.class,
         StringSubQueryTest.class,
         ExceptionSubQueryTest.class,
-        TupleNotAvailableSubQueryTest.class,
+        MultiSelectNotAvailableSubQueryTest.class,
         SubQueryCTOTest.class
 })
 public class UaiCriteriaAbstractSuit extends AbstractTest {

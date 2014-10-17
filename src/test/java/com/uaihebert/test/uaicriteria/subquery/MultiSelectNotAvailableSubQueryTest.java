@@ -21,7 +21,7 @@ import com.uaihebert.test.AbstractTest;
 import com.uaihebert.uaicriteria.UaiCriteria;
 import org.junit.Test;
 
-public class TupleNotAvailableSubQueryTest extends AbstractTest {
+public class MultiSelectNotAvailableSubQueryTest extends AbstractTest {
 
     @Test(expected = IllegalStateException.class)
     public void isAverageRaisingException() {
@@ -42,12 +42,12 @@ public class TupleNotAvailableSubQueryTest extends AbstractTest {
     }
 
     @Test(expected = IllegalStateException.class)
-    public void isAddTupleSelectAttributeRaisingException() {
+    public void isAddMultiSelectSelectAttributeRaisingException() {
         final UaiCriteria<RegularEntityTwo> uaiCriteria = createCriteria(RegularEntityTwo.class);
 
         final UaiCriteria<RegularEntityOne> subQuery = uaiCriteria.subQuery("id", RegularEntityOne.class);
 
-        subQuery.addTupleSelectAttribute("");
+        subQuery.addMultiSelectAttribute("");
     }
 
     @Test(expected = IllegalStateException.class)

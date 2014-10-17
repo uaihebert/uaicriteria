@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * */
-package com.uaihebert.test.uaicriteria.tuple;
+package com.uaihebert.test.uaicriteria.multiSelect;
 
 import com.uaihebert.model.test.RegularEntityOne;
-import com.uaihebert.test.TupleAbstractTest;
+import com.uaihebert.test.MultiSelectAbstractTest;
 import com.uaihebert.uaicriteria.UaiCriteria;
 import org.junit.Test;
 
@@ -25,11 +25,11 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class CountTupleTest extends TupleAbstractTest {
+public class CountMultiSelectTest extends MultiSelectAbstractTest {
 
     @Test(expected = IllegalStateException.class)
-    public void isRaisingExceptionWithRegularCountWithTupleCriteria() {
-        final UaiCriteria<RegularEntityOne> uaiCriteria = createTupleCriteria(RegularEntityOne.class);
+    public void isRaisingExceptionWithRegularCountWithMultiSelectCriteria() {
+        final UaiCriteria<RegularEntityOne> uaiCriteria = createMultiSelectCriteria(RegularEntityOne.class);
 
         uaiCriteria.countRegularCriteria();
     }
@@ -47,16 +47,16 @@ public class CountTupleTest extends TupleAbstractTest {
 
         assertTrue("making sure that the count worked", jpqlCount > 0);
 
-        final UaiCriteria<RegularEntityOne> uaiCriteria = createTupleCriteria(RegularEntityOne.class);
+        final UaiCriteria<RegularEntityOne> uaiCriteria = createMultiSelectCriteria(RegularEntityOne.class);
         uaiCriteria.countAttribute("id");
 
-        final Long criteriaCount = (Long) uaiCriteria.getTupleResult().get(0);
+        final Long criteriaCount = (Long) uaiCriteria.getMultiSelectResult().get(0);
 
         assertEquals("making sure that the count has the same value", jpqlCount, criteriaCount);
     }
 
     @Test
-    public void isTupleWorkingWithSeveralGroupByAttributesAndSumFunction() {
+    public void isMultiSelectWorkingWithSeveralGroupByAttributesAndSumFunction() {
         if (isBatoo()) {
             return;
         }
@@ -65,12 +65,12 @@ public class CountTupleTest extends TupleAbstractTest {
                 "r.dateAttributeTwo from RegularEntityOne r group by r.id, r.stringAttribute, " +
                 "r.floatAttributeOne, r.dateAttributeTwo";
 
-        final UaiCriteria<RegularEntityOne> uaiCriteria = createTupleCriteria(RegularEntityOne.class);
-        uaiCriteria.addTupleSelectAttribute("id")
+        final UaiCriteria<RegularEntityOne> uaiCriteria = createMultiSelectCriteria(RegularEntityOne.class);
+        uaiCriteria.addMultiSelectAttribute("id")
                 .countAttribute("id")
-                .addTupleSelectAttribute("stringAttribute")
-                .addTupleSelectAttribute("floatAttributeOne")
-                .addTupleSelectAttribute("dateAttributeTwo");
+                .addMultiSelectAttribute("stringAttribute")
+                .addMultiSelectAttribute("floatAttributeOne")
+                .addMultiSelectAttribute("dateAttributeTwo");
         uaiCriteria.groupBy("id", "stringAttribute", "floatAttributeOne")
                 .groupBy("dateAttributeTwo");
 

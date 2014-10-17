@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * */
-package com.uaihebert.test.uaicriteria.tuple;
+package com.uaihebert.test.uaicriteria.multiSelect;
 
 import com.uaihebert.model.test.RegularEntityOne;
-import com.uaihebert.test.TupleAbstractTest;
+import com.uaihebert.test.MultiSelectAbstractTest;
 import com.uaihebert.uaicriteria.UaiCriteria;
 import org.junit.Test;
 
@@ -25,7 +25,7 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class AverageTupleTest extends TupleAbstractTest {
+public class AverageMultiSelectTest extends MultiSelectAbstractTest {
 
     @Test
     public void isAvgMethodInvokedWithOneParameterOnly() {
@@ -46,7 +46,7 @@ public class AverageTupleTest extends TupleAbstractTest {
 
         assertTrue("making sure that the avg worked", avgAverage > 0);
 
-        final UaiCriteria<RegularEntityOne> uaiCriteria = createTupleCriteria(RegularEntityOne.class);
+        final UaiCriteria<RegularEntityOne> uaiCriteria = createMultiSelectCriteria(RegularEntityOne.class);
         uaiCriteria.average("id");
 
         final Double criteriaAvg = extractResult(uaiCriteria, Double.class);
@@ -58,7 +58,7 @@ public class AverageTupleTest extends TupleAbstractTest {
         //Open JPA is returnin Longs
         final Long avgJPQL = (Long) resultFromJPQL.get(0);
 
-        final UaiCriteria<RegularEntityOne> uaiCriteria = createTupleCriteria(RegularEntityOne.class);
+        final UaiCriteria<RegularEntityOne> uaiCriteria = createMultiSelectCriteria(RegularEntityOne.class);
         uaiCriteria.average("id");
 
         final Double criteriaAvg = extractResult(uaiCriteria, Double.class);
@@ -74,8 +74,8 @@ public class AverageTupleTest extends TupleAbstractTest {
 
         final String query = "select r.id, avg(r.id) from RegularEntityOne r group by r.id";
 
-        final UaiCriteria<RegularEntityOne> uaiCriteria = createTupleCriteria(RegularEntityOne.class);
-        uaiCriteria.addTupleSelectAttribute("id").average("id");
+        final UaiCriteria<RegularEntityOne> uaiCriteria = createMultiSelectCriteria(RegularEntityOne.class);
+        uaiCriteria.addMultiSelectAttribute("id").average("id");
         uaiCriteria.groupBy("id");
 
         if (isEclipselink()) {
@@ -87,15 +87,15 @@ public class AverageTupleTest extends TupleAbstractTest {
 
         assertTrue("making sure that the avg worked", jpqlList.size() > 1);
 
-        final List tupleList = uaiCriteria.getTupleResult();
+        final List multiSelectList = uaiCriteria.getMultiSelectResult();
 
-        assertEquals("making sure that the avg has the same value", jpqlList.size(), tupleList.size());
+        assertEquals("making sure that the avg has the same value", jpqlList.size(), multiSelectList.size());
 
-        validateListResult(jpqlList, tupleList, OpenJpaIndexToConvert.SECOND);
+        validateListResult(jpqlList, multiSelectList, OpenJpaIndexToConvert.SECOND);
     }
 
     @Test
-    public void isTupleWorkingWithSeveralGroupByAttributesAndAverageFunction() {
+    public void isMultiSelectWorkingWithSeveralGroupByAttributesAndAverageFunction() {
         if (isBatoo()) {
             return;
         }
@@ -104,12 +104,12 @@ public class AverageTupleTest extends TupleAbstractTest {
                 "r.dateAttributeTwo from RegularEntityOne r group by r.id, r.stringAttribute, " +
                 "r.floatAttributeOne, r.dateAttributeTwo";
 
-        final UaiCriteria<RegularEntityOne> uaiCriteria = createTupleCriteria(RegularEntityOne.class);
-        uaiCriteria.addTupleSelectAttribute("id")
+        final UaiCriteria<RegularEntityOne> uaiCriteria = createMultiSelectCriteria(RegularEntityOne.class);
+        uaiCriteria.addMultiSelectAttribute("id")
                 .average("id")
-                .addTupleSelectAttribute("stringAttribute")
-                .addTupleSelectAttribute("floatAttributeOne")
-                .addTupleSelectAttribute("dateAttributeTwo");
+                .addMultiSelectAttribute("stringAttribute")
+                .addMultiSelectAttribute("floatAttributeOne")
+                .addMultiSelectAttribute("dateAttributeTwo");
         uaiCriteria.groupBy("id", "stringAttribute", "floatAttributeOne")
                 .groupBy("dateAttributeTwo");
 
@@ -122,10 +122,10 @@ public class AverageTupleTest extends TupleAbstractTest {
 
         assertTrue("making sure that the average worked", jpqlList.size() > 1);
 
-        final List tupleList = uaiCriteria.getTupleResult();
+        final List multiSelectList = uaiCriteria.getMultiSelectResult();
 
-        assertEquals("making sure that the average has the same value", jpqlList.size(), tupleList.size());
+        assertEquals("making sure that the average has the same value", jpqlList.size(), multiSelectList.size());
 
-        validateListResult(jpqlList, tupleList, OpenJpaIndexToConvert.SECOND);
+        validateListResult(jpqlList, multiSelectList, OpenJpaIndexToConvert.SECOND);
     }
 }

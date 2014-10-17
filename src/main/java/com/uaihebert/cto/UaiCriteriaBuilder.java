@@ -36,7 +36,7 @@ public final class UaiCriteriaBuilder {
 
         configureJoins(uaiCTOImp, uaiCriteria);
 
-        addTupleAttributes(uaiCTOImp, uaiCriteria);
+        addMultiSelectAttributes(uaiCTOImp, uaiCriteria);
 
         addCriteriaConditions(uaiCTOImp, uaiCriteria);
 
@@ -51,8 +51,8 @@ public final class UaiCriteriaBuilder {
         return uaiCriteria;
     }
 
-    private static <T> void addTupleAttributes(final UaiCTOImp<T> uaiCTOImp, final UaiCriteriaImp<T> uaiCriteria) {
-        uaiCriteria.addTupleSelectAttribute(Arrays.copyOf(uaiCTOImp.tupleAttributeList.toArray(), uaiCTOImp.tupleAttributeList.toArray().length, String[].class));
+    private static <T> void addMultiSelectAttributes(final UaiCTOImp<T> uaiCTOImp, final UaiCriteriaImp<T> uaiCriteria) {
+        uaiCriteria.addMultiSelectAttribute(Arrays.copyOf(uaiCTOImp.multiSelectAttributeList.toArray(), uaiCTOImp.multiSelectAttributeList.toArray().length, String[].class));
     }
 
     private static <T> void configureGroupBy(final UaiCTOImp<T> uaiCTOImp, final UaiCriteriaImp<T> uaiCriteria) {

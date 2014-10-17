@@ -36,7 +36,7 @@ public final class UaiCTOImp<T> implements UaiCriteria<T> {
     final List<CriteriaConditionHolder> criteriaConditionTypeList;
 
     final List<String> groupByList = new ArrayList<String>();
-    final List<String> tupleAttributeList = new ArrayList<String>();
+    final List<String> multiSelectAttributeList = new ArrayList<String>();
 
     public UaiCTOImp() {
         orderByList = new ArrayList<OrderByHolder>();
@@ -67,7 +67,7 @@ public final class UaiCTOImp<T> implements UaiCriteria<T> {
     }
 
     @Override
-    public List getTupleResult() {
+    public List getMultiSelectResult() {
         throw resultQueryNotAllowedOnCTO();
     }
 
@@ -478,8 +478,8 @@ public final class UaiCTOImp<T> implements UaiCriteria<T> {
     }
 
     @Override
-    public UaiCriteria<T> addTupleSelectAttribute(final String... attributeNameArray) {
-        tupleAttributeList.addAll(Arrays.asList(attributeNameArray));
+    public UaiCriteria<T> addMultiSelectAttribute(final String... attributeNameArray) {
+        multiSelectAttributeList.addAll(Arrays.asList(attributeNameArray));
         return this;
     }
 

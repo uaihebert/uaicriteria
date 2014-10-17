@@ -13,14 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * */
-package com.uaihebert.test.uaicriteria.tuple;
+package com.uaihebert.test.uaicriteria.multiSelect;
 
 import com.uaihebert.model.test.RegularEntityOne;
-import com.uaihebert.test.TupleAbstractTest;
+import com.uaihebert.test.MultiSelectAbstractTest;
 import com.uaihebert.uaicriteria.UaiCriteria;
 import org.junit.Test;
 
-public class DivideTupleTest extends TupleAbstractTest {
+public class DiffMultiSelectTest extends MultiSelectAbstractTest {
 
     @Test
     public void isMethodInvokedWithTwoParameters() {
@@ -28,10 +28,10 @@ public class DivideTupleTest extends TupleAbstractTest {
             return;
         }
 
-        final String query = "select r.id, (r.id / r.longAttributeOne) from RegularEntityOne r";
+        final String query = "select r.id, (r.id - r.integerAttributeOne) from RegularEntityOne r";
 
-        final UaiCriteria<RegularEntityOne> uaiCriteria = createTupleCriteria(RegularEntityOne.class);
-        uaiCriteria.addTupleSelectAttribute("id").divide("id", "longAttributeOne");
+        final UaiCriteria<RegularEntityOne> uaiCriteria = createMultiSelectCriteria(RegularEntityOne.class);
+        uaiCriteria.addMultiSelectAttribute("id").diff("id", "integerAttributeOne");
 
         if (isEclipselink()) {
             validateResultWithVector(query, uaiCriteria);
@@ -42,20 +42,20 @@ public class DivideTupleTest extends TupleAbstractTest {
     }
 
     @Test
-    public void isTupleWorkingWithSeveralAttributesAndFunction() {
+    public void isMultiSelectWorkingWithSeveralAttributesAndFunction() {
         if (isBatoo()) {
             return;
         }
 
-        final String query = "select r.id, (r.id / r.integerAttributeOne), r.stringAttribute, r.floatAttributeOne, " +
+        final String query = "select r.id, (r.id - r.integerAttributeOne), r.stringAttribute, r.floatAttributeOne, " +
                 "r.dateAttributeTwo from RegularEntityOne r ";
 
-        final UaiCriteria<RegularEntityOne> uaiCriteria = createTupleCriteria(RegularEntityOne.class);
-        uaiCriteria.addTupleSelectAttribute("id")
-                .divide("id", "integerAttributeOne")
-                .addTupleSelectAttribute("stringAttribute")
-                .addTupleSelectAttribute("floatAttributeOne")
-                .addTupleSelectAttribute("dateAttributeTwo");
+        final UaiCriteria<RegularEntityOne> uaiCriteria = createMultiSelectCriteria(RegularEntityOne.class);
+        uaiCriteria.addMultiSelectAttribute("id")
+                .diff("id", "integerAttributeOne")
+                .addMultiSelectAttribute("stringAttribute")
+                .addMultiSelectAttribute("floatAttributeOne")
+                .addMultiSelectAttribute("dateAttributeTwo");
 
         if (isEclipselink()) {
             validateResultWithVector(query, uaiCriteria);
@@ -71,14 +71,14 @@ public class DivideTupleTest extends TupleAbstractTest {
             return;
         }
 
-        final String query = "select r.id, (r.id / 10), r.stringAttribute, r.floatAttributeOne, " +
+        final String query = "select r.id, (r.id - 10), r.stringAttribute, r.floatAttributeOne, " +
                 "r.dateAttributeTwo from RegularEntityOne r ";
 
-        final UaiCriteria<RegularEntityOne> uaiCriteria = createTupleCriteria(RegularEntityOne.class);
-        uaiCriteria.addTupleSelectAttribute("id")
-                .divide("id", 10L)
-                .addTupleSelectAttribute("stringAttribute", "floatAttributeOne")
-                .addTupleSelectAttribute("dateAttributeTwo");
+        final UaiCriteria<RegularEntityOne> uaiCriteria = createMultiSelectCriteria(RegularEntityOne.class);
+        uaiCriteria.addMultiSelectAttribute("id")
+                .diff("id", 10L)
+                .addMultiSelectAttribute("stringAttribute", "floatAttributeOne")
+                .addMultiSelectAttribute("dateAttributeTwo");
 
         if (isEclipselink()) {
             validateResultWithVector(query, uaiCriteria);
@@ -94,14 +94,14 @@ public class DivideTupleTest extends TupleAbstractTest {
             return;
         }
 
-        final String query = "select r.id, (10 / r.id), r.stringAttribute, r.floatAttributeOne, " +
+        final String query = "select r.id, (10 - r.id), r.stringAttribute, r.floatAttributeOne, " +
                 "r.dateAttributeTwo from RegularEntityOne r ";
 
-        final UaiCriteria<RegularEntityOne> uaiCriteria = createTupleCriteria(RegularEntityOne.class);
-        uaiCriteria.addTupleSelectAttribute("id")
-                .divide(10L, "id")
-                .addTupleSelectAttribute("stringAttribute", "floatAttributeOne")
-                .addTupleSelectAttribute("dateAttributeTwo");
+        final UaiCriteria<RegularEntityOne> uaiCriteria = createMultiSelectCriteria(RegularEntityOne.class);
+        uaiCriteria.addMultiSelectAttribute("id")
+                .diff(10L, "id")
+                .addMultiSelectAttribute("stringAttribute", "floatAttributeOne")
+                .addMultiSelectAttribute("dateAttributeTwo");
 
         if (isEclipselink()) {
             validateResultWithVector(query, uaiCriteria);

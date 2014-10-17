@@ -22,14 +22,14 @@ import com.uaihebert.uaicriteria.base.element.BaseCriteriaFactory;
 import com.uaihebert.uaicriteria.base.element.BasicCriteriaElementsFactory;
 import com.uaihebert.uaicriteria.base.element.EasyCriteriaFactory;
 import com.uaihebert.uaicriteria.path.AbstractPathCreator;
+import com.uaihebert.uaicriteria.path.MultiSelectQueryPathCreator;
 import com.uaihebert.uaicriteria.path.PathExtractor;
 import com.uaihebert.uaicriteria.path.PathHelper;
 import com.uaihebert.uaicriteria.path.RegularQueryPathCreator;
 import com.uaihebert.uaicriteria.path.StringPathBreaker;
-import com.uaihebert.uaicriteria.path.TupleQueryPathCreator;
 import com.uaihebert.uaicriteria.predicate.AbstractPredicateCreator;
+import com.uaihebert.uaicriteria.predicate.MultiSelectQueryPredicateCreator;
 import com.uaihebert.uaicriteria.predicate.RegularQueryPredicateCreator;
-import com.uaihebert.uaicriteria.predicate.TupleQueryPredicateCreator;
 import com.uaihebert.util.ReflectionUtil;
 import org.junit.Test;
 
@@ -56,18 +56,18 @@ public class PrivateConstructorTest {
     }
 
     @Test
-    public void isTupleQueryPathCreatorConstructorWorking() throws Exception {
-        final Constructor<TupleQueryPathCreator> constructor = TupleQueryPathCreator.class.getDeclaredConstructor(new Class[0]);
+    public void isMultiSelectQueryPathCreatorConstructorWorking() throws Exception {
+        final Constructor<MultiSelectQueryPathCreator> constructor = MultiSelectQueryPathCreator.class.getDeclaredConstructor(new Class[0]);
         constructor.setAccessible(true);
-        final TupleQueryPathCreator object = constructor.newInstance(new Object[0]);
+        final MultiSelectQueryPathCreator object = constructor.newInstance(new Object[0]);
         assertNotNull(object);
     }
 
     @Test
-    public void isTupleQueryPredicateCreatorConstructorWorking() throws Exception {
-        final Constructor<TupleQueryPredicateCreator> constructor = TupleQueryPredicateCreator.class.getDeclaredConstructor(new Class[0]);
+    public void isMultiSelectQueryPredicateCreatorConstructorWorking() throws Exception {
+        final Constructor<MultiSelectQueryPredicateCreator> constructor = MultiSelectQueryPredicateCreator.class.getDeclaredConstructor(new Class[0]);
         constructor.setAccessible(true);
-        final TupleQueryPredicateCreator object = constructor.newInstance(new Object[0]);
+        final MultiSelectQueryPredicateCreator object = constructor.newInstance(new Object[0]);
         assertNotNull(object);
     }
 

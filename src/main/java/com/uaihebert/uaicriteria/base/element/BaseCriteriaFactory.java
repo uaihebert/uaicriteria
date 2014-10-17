@@ -46,7 +46,7 @@ public final class BaseCriteriaFactory {
         return new BaseCriteria(root, criteriaQuery, criteriaBuilder, entityClass);
     }
 
-    public static <T> BaseCriteria<T> createTupleBaseCriteria(final EntityManager entityManager, final Class<T> entityClass) {
+    public static <T> BaseCriteria<T> createMultiSelectBaseCriteria(final EntityManager entityManager, final Class<T> entityClass) {
         final CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         final CriteriaQuery<Object> criteriaQuery = criteriaBuilder.createQuery(Object.class);
         final Root<T> root = criteriaQuery.from(entityClass);

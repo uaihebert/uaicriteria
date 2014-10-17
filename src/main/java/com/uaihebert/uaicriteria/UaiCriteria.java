@@ -40,8 +40,8 @@ public interface UaiCriteria<T> {
     public T getSingleResult();
 
     /**
-     * Will get a tuple result from a query. A tuple query is when you want to select attributes only, and not an Entity.
-     * A sample of tuple query could be: <code>select avg(p.age), p.gender from Person p group by p.gender</code>
+     * Will get a multiSelect result from a query. A multiSelect query is when you want to select attributes only, and not an Entity.
+     * A sample of multiSelect query could be: <code>select avg(p.age), p.gender from Person p group by p.gender</code>
      * <p/>
      * The result will change according to the JPA Provider that you are using, and to the type of the result.
      * <p/>
@@ -49,25 +49,25 @@ public interface UaiCriteria<T> {
      * <p/>
      * If you do:
      * <code>
-     * UaiCriteria<Person> uaiCriteria = UaiCriteriaFactory.createTupleCriteria(entityManager, Person.class);
+     * UaiCriteria<Person> uaiCriteria = UaiCriteriaFactory.createMultiSelectCriteria(entityManager, Person.class);
      * uaiCriteria.average("age");
      * </code>
      * <p/>
-     * When you do uaiCriteria.getTupleResult().get(0) a class java.lang.Double would be returned
+     * When you do uaiCriteria.getMultiSelectResult().get(0) a class java.lang.Double would be returned
      * <p/>
      * But if you do:
      * <code>
-     * UaiCriteria<Person> uaiCriteria = UaiCriteriaFactory.createTupleCriteria(entityManager, Person.class);
+     * UaiCriteria<Person> uaiCriteria = UaiCriteriaFactory.createMultiSelectCriteria(entityManager, Person.class);
      * uaiCriteria.average("age");
-     * uaiCriteria.addTupleSelectAttribute("gender");
+     * uaiCriteria.addMultiSelectAttribute("gender");
      * uaiCriteria.groupBy("gender");
      * </code>
      * <p/>
-     * When you do uaiCriteria.getTupleResult().get(0) a Object[] would be returned
+     * When you do uaiCriteria.getMultiSelectResult().get(0) a Object[] would be returned
      *
-     * @return A list with the tuple result
+     * @return A list with the multiSelect result
      */
-    public List getTupleResult();
+    public List getMultiSelectResult();
 
     /**
      * Will create a SubQuery to be used. You can use a SubQuery like br.com.m4u.csu.rest.api.model
@@ -869,7 +869,7 @@ public interface UaiCriteria<T> {
      * )
      * </code>
      * <p/>
-     * This feature is not allowed in CTO/Tuple query [YET]
+     * This feature is not allowed in CTO/MultiSelect query [YET]
      *
      * @param attributeName will be returned in the subQuery
      * @param uaiSubQuery   an instance of UaiCriteria to be used as subQuery. You can create one using the method {@link #subQuery(String, Class)}
@@ -900,7 +900,7 @@ public interface UaiCriteria<T> {
      * )
      * </code>
      * <p/>
-     * This feature is not allowed in CTO/Tuple query [YET]
+     * This feature is not allowed in CTO/MultiSelect query [YET]
      *
      * @param attributeName will be returned in the subQuery
      * @param uaiSubQuery   an instance of UaiCriteria to be used as subQuery. You can create one using the method {@link #subQuery(String, Class)}
@@ -1081,7 +1081,7 @@ public interface UaiCriteria<T> {
     public Long countRegularCriteria();
 
     /**
-     * Will count an attribute, but the return will be an tuple query. The JPQL would be like:
+     * Will count an attribute, but the return will be an multiSelect query. The JPQL would be like:
      * <p/>
      * <code>select count(p.id) from Person p </code>
      *
@@ -1099,7 +1099,7 @@ public interface UaiCriteria<T> {
     public UaiCriteria<T> addHint(final String key, final String value);
 
     /**
-     * Will execute a JPQL function, the return will be an tuple query. The JPQL would be like:
+     * Will execute a JPQL function, the return will be an multiSelect query. The JPQL would be like:
      * <p/>
      * <code>select sum(p.id) from Person p </code>
      *
@@ -1109,7 +1109,7 @@ public interface UaiCriteria<T> {
     public UaiCriteria<T> sum(final String... attributeNameArray);
 
     /**
-     * Will execute a JPQL function, the return will be an tuple query. The JPQL would be like:
+     * Will execute a JPQL function, the return will be an multiSelect query. The JPQL would be like:
      * <p/>
      * <code>select p.id + 10 from Person p </code>
      *
@@ -1120,7 +1120,7 @@ public interface UaiCriteria<T> {
     public <N extends Number> UaiCriteria<T> sum(final String attributeName, final N number);
 
     /**
-     * Will execute a JPQL function, the return will be an tuple query. The JPQL would be like:
+     * Will execute a JPQL function, the return will be an multiSelect query. The JPQL would be like:
      * <p/>
      * <code>select p.id + 10 from Person p </code>
      *
@@ -1131,7 +1131,7 @@ public interface UaiCriteria<T> {
     public <N extends Number> UaiCriteria<T> sum(final N number, final String attributeName);
 
     /**
-     * Will execute a JPQL function, the return will be an tuple query. The JPQL would be like:
+     * Will execute a JPQL function, the return will be an multiSelect query. The JPQL would be like:
      * <p/>
      * <code>select p.age - p.firstKissAge from Person p </code>
      *
@@ -1142,7 +1142,7 @@ public interface UaiCriteria<T> {
     public UaiCriteria<T> diff(final String firstAttribute, final String secondAttribute);
 
     /**
-     * Will execute a JPQL function, the return will be an tuple query. The JPQL would be like:
+     * Will execute a JPQL function, the return will be an multiSelect query. The JPQL would be like:
      * <p/>
      * <code>select p.age - 10 from Person p </code>
      *
@@ -1153,7 +1153,7 @@ public interface UaiCriteria<T> {
     public <N extends Number> UaiCriteria<T> diff(final String attributeName, final N number);
 
     /**
-     * Will execute a JPQL function, the return will be an tuple query. The JPQL would be like:
+     * Will execute a JPQL function, the return will be an multiSelect query. The JPQL would be like:
      * <p/>
      * <code>select 10 - p.age from Person p </code>
      *
@@ -1164,7 +1164,7 @@ public interface UaiCriteria<T> {
     public <N extends Number> UaiCriteria<T> diff(final N number, final String attributeName);
 
     /**
-     * Will execute a JPQL function, the return will be an tuple query. The JPQL would be like:
+     * Will execute a JPQL function, the return will be an multiSelect query. The JPQL would be like:
      * <p/>
      * <code>select p.age * p.firstKissAge from Person p </code>
      *
@@ -1175,7 +1175,7 @@ public interface UaiCriteria<T> {
     public UaiCriteria<T> multiply(final String firstAttribute, final String secondAttribute);
 
     /**
-     * Will execute a JPQL function, the return will be an tuple query. The JPQL would be like:
+     * Will execute a JPQL function, the return will be an multiSelect query. The JPQL would be like:
      * <p/>
      * <code>select p.age * 10 from Person p </code>
      *
@@ -1186,7 +1186,7 @@ public interface UaiCriteria<T> {
     public <N extends Number> UaiCriteria<T> multiply(final String attributeName, final N number);
 
     /**
-     * Will execute a JPQL function, the return will be an tuple query. The JPQL would be like:
+     * Will execute a JPQL function, the return will be an multiSelect query. The JPQL would be like:
      * <p/>
      * <code>select 10 * p.age from Person p </code>
      *
@@ -1197,7 +1197,7 @@ public interface UaiCriteria<T> {
     public <N extends Number> UaiCriteria<T> multiply(final N number, final String attributeName);
 
     /**
-     * Will execute a JPQL function, the return will be an tuple query. The JPQL would be like:
+     * Will execute a JPQL function, the return will be an multiSelect query. The JPQL would be like:
      * <p/>
      * <code>select p.age / p.firstKissAge from Person p </code>
      *
@@ -1208,7 +1208,7 @@ public interface UaiCriteria<T> {
     public UaiCriteria<T> divide(final String firstAttribute, final String secondAttribute);
 
     /**
-     * Will execute a JPQL function, the return will be an tuple query. The JPQL would be like:
+     * Will execute a JPQL function, the return will be an multiSelect query. The JPQL would be like:
      * <p/>
      * <code>select p.age / 10 from Person p </code>
      *
@@ -1219,7 +1219,7 @@ public interface UaiCriteria<T> {
     public <N extends Number> UaiCriteria<T> divide(final String attributeName, final N number);
 
     /**
-     * Will execute a JPQL function, the return will be an tuple query. The JPQL would be like:
+     * Will execute a JPQL function, the return will be an multiSelect query. The JPQL would be like:
      * <p/>
      * <code>select 10 / p.age from Person p </code>
      *
@@ -1230,7 +1230,7 @@ public interface UaiCriteria<T> {
     public <N extends Number> UaiCriteria<T> divide(final N number, final String attributeName);
 
     /**
-     * Will execute a JPQL function, the return will be an tuple query. The JPQL would be like:
+     * Will execute a JPQL function, the return will be an multiSelect query. The JPQL would be like:
      * <p/>
      * <code>select p.age % p.firstKissAge from Person p </code>
      *
@@ -1241,7 +1241,7 @@ public interface UaiCriteria<T> {
     public UaiCriteria<T> module(final String firstAttribute, final String secondAttribute);
 
     /**
-     * Will execute a JPQL function, the return will be an tuple query. The JPQL would be like:
+     * Will execute a JPQL function, the return will be an multiSelect query. The JPQL would be like:
      * <p/>
      * <code>select p.age % 10 from Person p </code>
      *
@@ -1252,7 +1252,7 @@ public interface UaiCriteria<T> {
     public UaiCriteria<T> module(final String attributeName, final Integer number);
 
     /**
-     * Will execute a JPQL function, the return will be an tuple query. The JPQL would be like:
+     * Will execute a JPQL function, the return will be an multiSelect query. The JPQL would be like:
      * <p/>
      * <code>select 10 % p.age from Person p </code>
      *
@@ -1263,7 +1263,7 @@ public interface UaiCriteria<T> {
     public UaiCriteria<T> module(final Integer number, final String attributeName);
 
     /**
-     * Will execute a JPQL function, the return will be an tuple query. The JPQL would be like:
+     * Will execute a JPQL function, the return will be an multiSelect query. The JPQL would be like:
      * <p/>
      * <code>select avg(p.age) from Person p </code>
      *
@@ -1273,7 +1273,7 @@ public interface UaiCriteria<T> {
     public UaiCriteria<T> average(final String... attributeNameArray);
 
     /**
-     * Will execute a JPQL function, the return will be an tuple query. The JPQL would be like:
+     * Will execute a JPQL function, the return will be an multiSelect query. The JPQL would be like:
      * <p/>
      * <code>select sqrt(p.age) from Person p </code>
      *
@@ -1290,7 +1290,7 @@ public interface UaiCriteria<T> {
      * @param attributeNameArray attributes to be returned
      * @return the current UaiCriteria instance
      */
-    public UaiCriteria<T> addTupleSelectAttribute(final String... attributeNameArray);
+    public UaiCriteria<T> addMultiSelectAttribute(final String... attributeNameArray);
 
     /**
      * Will execute a group by in a query. The JPQL would be like:

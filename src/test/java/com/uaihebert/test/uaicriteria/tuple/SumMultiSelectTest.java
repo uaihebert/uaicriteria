@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * */
-package com.uaihebert.test.uaicriteria.tuple;
+package com.uaihebert.test.uaicriteria.multiSelect;
 
 import com.uaihebert.model.test.RegularEntityOne;
-import com.uaihebert.test.TupleAbstractTest;
+import com.uaihebert.test.MultiSelectAbstractTest;
 import com.uaihebert.uaicriteria.UaiCriteria;
 import org.junit.Test;
 
@@ -25,7 +25,7 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class SumTupleTest extends TupleAbstractTest {
+public class SumMultiSelectTest extends MultiSelectAbstractTest {
 
     @Test
     public void isSumMethodInvokedWithOneParameterOnly() {
@@ -40,7 +40,7 @@ public class SumTupleTest extends TupleAbstractTest {
 
         assertTrue("making sure that the sum worked", jpqlSum > 0);
 
-        final UaiCriteria<RegularEntityOne> uaiCriteria = createTupleCriteria(RegularEntityOne.class);
+        final UaiCriteria<RegularEntityOne> uaiCriteria = createMultiSelectCriteria(RegularEntityOne.class);
         uaiCriteria.sum("id");
 
         final Long criteriaSum = extractResult(uaiCriteria, Long.class);
@@ -56,8 +56,8 @@ public class SumTupleTest extends TupleAbstractTest {
 
         final String query = "select r.id, sum(r.id) from RegularEntityOne r group by r.id";
 
-        final UaiCriteria<RegularEntityOne> uaiCriteria = createTupleCriteria(RegularEntityOne.class);
-        uaiCriteria.addTupleSelectAttribute("id").sum("id");
+        final UaiCriteria<RegularEntityOne> uaiCriteria = createMultiSelectCriteria(RegularEntityOne.class);
+        uaiCriteria.addMultiSelectAttribute("id").sum("id");
         uaiCriteria.groupBy("id");
 
         if (isEclipselink()) {
@@ -69,7 +69,7 @@ public class SumTupleTest extends TupleAbstractTest {
     }
 
     @Test
-    public void isTupleWorkingWithSeveralGroupByAttributesAndSumFunction() {
+    public void isMultiSelectWorkingWithSeveralGroupByAttributesAndSumFunction() {
         if (isBatoo()) {
             return;
         }
@@ -78,12 +78,12 @@ public class SumTupleTest extends TupleAbstractTest {
                 "r.dateAttributeTwo from RegularEntityOne r group by r.id, r.stringAttribute, " +
                 "r.floatAttributeOne, r.dateAttributeTwo";
 
-        final UaiCriteria<RegularEntityOne> uaiCriteria = createTupleCriteria(RegularEntityOne.class);
-        uaiCriteria.addTupleSelectAttribute("id")
+        final UaiCriteria<RegularEntityOne> uaiCriteria = createMultiSelectCriteria(RegularEntityOne.class);
+        uaiCriteria.addMultiSelectAttribute("id")
                 .sum("id")
-                .addTupleSelectAttribute("stringAttribute")
-                .addTupleSelectAttribute("floatAttributeOne")
-                .addTupleSelectAttribute("dateAttributeTwo");
+                .addMultiSelectAttribute("stringAttribute")
+                .addMultiSelectAttribute("floatAttributeOne")
+                .addMultiSelectAttribute("dateAttributeTwo");
         uaiCriteria.groupBy("id", "stringAttribute", "floatAttributeOne")
                 .groupBy("dateAttributeTwo");
 
@@ -106,11 +106,11 @@ public class SumTupleTest extends TupleAbstractTest {
                 "r.dateAttributeTwo from RegularEntityOne r group by r.id, r.stringAttribute, " +
                 "r.floatAttributeOne, r.dateAttributeTwo";
 
-        final UaiCriteria<RegularEntityOne> uaiCriteria = createTupleCriteria(RegularEntityOne.class);
-        uaiCriteria.addTupleSelectAttribute("id")
+        final UaiCriteria<RegularEntityOne> uaiCriteria = createMultiSelectCriteria(RegularEntityOne.class);
+        uaiCriteria.addMultiSelectAttribute("id")
                 .sum("id", 10)
-                .addTupleSelectAttribute("stringAttribute", "floatAttributeOne")
-                .addTupleSelectAttribute("dateAttributeTwo");
+                .addMultiSelectAttribute("stringAttribute", "floatAttributeOne")
+                .addMultiSelectAttribute("dateAttributeTwo");
         uaiCriteria.groupBy("id", "stringAttribute", "floatAttributeOne")
                 .groupBy("dateAttributeTwo");
 
@@ -132,11 +132,11 @@ public class SumTupleTest extends TupleAbstractTest {
                 "r.dateAttributeTwo from RegularEntityOne r group by r.id, r.stringAttribute, " +
                 "r.floatAttributeOne, r.dateAttributeTwo";
 
-        final UaiCriteria<RegularEntityOne> uaiCriteria = createTupleCriteria(RegularEntityOne.class);
-        uaiCriteria.addTupleSelectAttribute("id")
+        final UaiCriteria<RegularEntityOne> uaiCriteria = createMultiSelectCriteria(RegularEntityOne.class);
+        uaiCriteria.addMultiSelectAttribute("id")
                 .sum(10, "id")
-                .addTupleSelectAttribute("stringAttribute", "floatAttributeOne")
-                .addTupleSelectAttribute("dateAttributeTwo");
+                .addMultiSelectAttribute("stringAttribute", "floatAttributeOne")
+                .addMultiSelectAttribute("dateAttributeTwo");
         uaiCriteria.groupBy("id", "stringAttribute", "floatAttributeOne")
                 .groupBy("dateAttributeTwo");
 

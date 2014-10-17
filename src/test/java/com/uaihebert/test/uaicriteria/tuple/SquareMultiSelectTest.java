@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * */
-package com.uaihebert.test.uaicriteria.tuple;
+package com.uaihebert.test.uaicriteria.multiSelect;
 
 import com.uaihebert.model.test.RegularEntityOne;
-import com.uaihebert.test.TupleAbstractTest;
+import com.uaihebert.test.MultiSelectAbstractTest;
 import com.uaihebert.uaicriteria.UaiCriteria;
 import org.junit.Test;
 
@@ -25,7 +25,7 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class SquareTupleTest extends TupleAbstractTest {
+public class SquareMultiSelectTest extends MultiSelectAbstractTest {
 
     @Test
     public void isSqrtMethodInvokedWithOneParameterOnly() {
@@ -46,7 +46,7 @@ public class SquareTupleTest extends TupleAbstractTest {
 
         assertTrue("making sure that the sqrt worked", sqrtSquare > 0);
 
-        final UaiCriteria<RegularEntityOne> uaiCriteria = createTupleCriteria(RegularEntityOne.class);
+        final UaiCriteria<RegularEntityOne> uaiCriteria = createMultiSelectCriteria(RegularEntityOne.class);
         uaiCriteria.square("id");
 
         final Double criteriaSqrt = extractResult(uaiCriteria, Double.class);
@@ -58,7 +58,7 @@ public class SquareTupleTest extends TupleAbstractTest {
         //Open JPA is returnin Longs
         final Number sqrtJPQL = (Number) resultFromJPQL.get(0);
 
-        final UaiCriteria<RegularEntityOne> uaiCriteria = createTupleCriteria(RegularEntityOne.class);
+        final UaiCriteria<RegularEntityOne> uaiCriteria = createMultiSelectCriteria(RegularEntityOne.class);
         uaiCriteria.square("id");
 
         final Double criteriaSqrt = extractResult(uaiCriteria, Double.class);
@@ -74,8 +74,8 @@ public class SquareTupleTest extends TupleAbstractTest {
 
         final String query = "select r.id, sqrt(r.id) from RegularEntityOne r group by r.id";
 
-        final UaiCriteria<RegularEntityOne> uaiCriteria = createTupleCriteria(RegularEntityOne.class);
-        uaiCriteria.addTupleSelectAttribute("id").square("id");
+        final UaiCriteria<RegularEntityOne> uaiCriteria = createMultiSelectCriteria(RegularEntityOne.class);
+        uaiCriteria.addMultiSelectAttribute("id").square("id");
         uaiCriteria.groupBy("id");
 
         if (isEclipselink()) {
@@ -87,15 +87,15 @@ public class SquareTupleTest extends TupleAbstractTest {
 
         assertTrue("making sure that the sqrt worked", jpqlList.size() > 1);
 
-        final List tupleList = uaiCriteria.getTupleResult();
+        final List multiSelectList = uaiCriteria.getMultiSelectResult();
 
-        assertEquals("making sure that the sqrt has the same value", jpqlList.size(), tupleList.size());
+        assertEquals("making sure that the sqrt has the same value", jpqlList.size(), multiSelectList.size());
 
-        validateListResult(jpqlList, tupleList, OpenJpaIndexToConvert.SECOND);
+        validateListResult(jpqlList, multiSelectList, OpenJpaIndexToConvert.SECOND);
     }
 
     @Test
-    public void isTupleWorkingWithSeveralGroupByAttributesAndSquareFunction() {
+    public void isMultiSelectWorkingWithSeveralGroupByAttributesAndSquareFunction() {
         if (isBatoo()) {
             return;
         }
@@ -104,12 +104,12 @@ public class SquareTupleTest extends TupleAbstractTest {
                 "r.dateAttributeTwo from RegularEntityOne r group by r.id, r.stringAttribute, " +
                 "r.floatAttributeOne, r.dateAttributeTwo";
 
-        final UaiCriteria<RegularEntityOne> uaiCriteria = createTupleCriteria(RegularEntityOne.class);
-        uaiCriteria.addTupleSelectAttribute("id")
+        final UaiCriteria<RegularEntityOne> uaiCriteria = createMultiSelectCriteria(RegularEntityOne.class);
+        uaiCriteria.addMultiSelectAttribute("id")
                 .square("id")
-                .addTupleSelectAttribute("stringAttribute")
-                .addTupleSelectAttribute("floatAttributeOne")
-                .addTupleSelectAttribute("dateAttributeTwo");
+                .addMultiSelectAttribute("stringAttribute")
+                .addMultiSelectAttribute("floatAttributeOne")
+                .addMultiSelectAttribute("dateAttributeTwo");
         uaiCriteria.groupBy("id", "stringAttribute", "floatAttributeOne")
                 .groupBy("dateAttributeTwo");
 
@@ -122,10 +122,10 @@ public class SquareTupleTest extends TupleAbstractTest {
 
         assertTrue("making sure that the square worked", jpqlList.size() > 1);
 
-        final List tupleList = uaiCriteria.getTupleResult();
+        final List multiSelectList = uaiCriteria.getMultiSelectResult();
 
-        assertEquals("making sure that the square has the same value", jpqlList.size(), tupleList.size());
+        assertEquals("making sure that the square has the same value", jpqlList.size(), multiSelectList.size());
 
-        validateListResult(jpqlList, tupleList, OpenJpaIndexToConvert.SECOND);
+        validateListResult(jpqlList, multiSelectList, OpenJpaIndexToConvert.SECOND);
     }
 }

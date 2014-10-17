@@ -29,7 +29,7 @@ public class BasicCriteriaElements<T> {
     EntityManager entityManager;
 
     private BaseCriteria countCriteria;
-    private BaseCriteria tupleCriteria;
+    private BaseCriteria multiSelectCriteria;
     private BaseCriteria regularCriteria;
     private BaseCriteria subQueryCriteria;
 
@@ -37,7 +37,7 @@ public class BasicCriteriaElements<T> {
 
     public TypedQuery<T> getRegularQuery() {
         if (regularCriteria == null) {
-            throw new IllegalStateException("You cannot get a regular query when you create a tuple query");
+            throw new IllegalStateException("You cannot get a regular query when you create a multiSelect query");
         }
 
         regularCriteria.setUpCriteria();
@@ -55,8 +55,8 @@ public class BasicCriteriaElements<T> {
     }
 
     public TypedQuery<Long> getCountQuery() {
-        if (tupleCriteria != null) {
-            throw new IllegalStateException("You cannot get a count from tuple query. \n If you want to count, you should use the method that will count an attribute");
+        if (multiSelectCriteria != null) {
+            throw new IllegalStateException("You cannot get a count from multiSelect query. \n If you want to count, you should use the method that will count an attribute");
         }
 
         countCriteria.setCountSelect();
@@ -71,19 +71,19 @@ public class BasicCriteriaElements<T> {
         return typedQuery;
     }
 
-    public TypedQuery<Object> getTupleQuery() {
-        if (tupleCriteria == null) {
-            throw new IllegalStateException("You cannot get a tuple query when you create a regular query");
+    public TypedQuery<Object> getMultiSelectQuery() {
+        if (multiSelectCriteria == null) {
+            throw new IllegalStateException("You cannot get a multiSelect query when you create a regular query");
         }
 
-        tupleCriteria.setTupleSelect();
+        multiSelectCriteria.setMultiSelectSelect();
 
-        tupleCriteria.setUpCriteria();
+        multiSelectCriteria.setUpCriteria();
 
-        final TypedQuery<Object> typedQuery = entityManager.createQuery(tupleCriteria.getConvertedCriteriaQuery());
+        final TypedQuery<Object> typedQuery = entityManager.createQuery(multiSelectCriteria.getConvertedCriteriaQuery());
 
         setPagination(typedQuery);
-        setUpHintMap(typedQuery, tupleCriteria);
+        setUpHintMap(typedQuery, multiSelectCriteria);
 
         return typedQuery;
     }
@@ -135,9 +135,9 @@ public class BasicCriteriaElements<T> {
         baseCriteriaList.add(this.countCriteria);
     }
 
-    public void setTupleCriteria(final BaseCriteria tupleCriteria) {
-        this.tupleCriteria = tupleCriteria;
-        baseCriteriaList.add(this.tupleCriteria);
+    public void setMultiSelectCriteria(final BaseCriteria multiSelectCriteria) {
+        this.multiSelectCriteria = multiSelectCriteria;
+        baseCriteriaList.add(this.multiSelectCriteria);
     }
 
     public void setRegularCriteria(final BaseCriteria regularCriteria) {
