@@ -45,3 +45,4 @@ You have the following mvn commands available:
 * if you want to test the project run: mvn clean test
 * if you want to generate the cobertura report use: mvn cobertura:clean cobertura:cobertura
     * the generated report can be found at: ``<uaiCriteria_FOLDER>``/target/site/cobertura/index.html
+* if you have a sonar server you will be able to create a report by doing mvn sonar:sonar
