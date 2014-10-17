@@ -56,8 +56,8 @@ public final class BasicCriteriaElementsFactory {
     private static <T> BasicCriteriaElements createForMultiSelectQuery(final EntityManager entityManager, final Class<T> entityClass) {
         final BasicCriteriaElements basicCriteriaElements = createBasicElements(entityManager);
 
-        final BaseCriteria<T> multiSelectBaseCriteria = BaseCriteriaFactory.createMultiSelectBaseCriteria(entityManager, entityClass);
-        basicCriteriaElements.setMultiSelectCriteria(multiSelectBaseCriteria);
+        final BaseCriteria<T> multiselectBaseCriteria = BaseCriteriaFactory.createMultiSelectBaseCriteria(entityManager, entityClass);
+        basicCriteriaElements.setMultiSelectCriteria(multiselectBaseCriteria);
 
         return basicCriteriaElements;
     }

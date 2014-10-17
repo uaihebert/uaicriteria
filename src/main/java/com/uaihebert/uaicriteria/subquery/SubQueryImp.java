@@ -116,11 +116,11 @@ public class SubQueryImp<T> extends UaiCriteriaImp<T> implements UaiCriteria<T> 
 
     @Override
     public UaiCriteria<T> sum(final String... attributeNameArray) {
-        return multiSelectNotAvailable();
+        return multiselectNotAvailable();
     }
 
-    private UaiCriteria<T> multiSelectNotAvailable() {
-        throw new IllegalStateException("Hello, I am a SubQuery. Right now is not possible to do multiSelect actions in a SubQuery. \n" +
+    private UaiCriteria<T> multiselectNotAvailable() {
+        throw new IllegalStateException("Hello, I am a SubQuery. Right now is not possible to do multiselect actions in a SubQuery. \n" +
                 getGetInTouchMessage());
     }
 
@@ -136,92 +136,92 @@ public class SubQueryImp<T> extends UaiCriteriaImp<T> implements UaiCriteria<T> 
 
     @Override
     public <N extends Number> UaiCriteria<T> sum(final String attributeName, final N number) {
-        return multiSelectNotAvailable();
+        return multiselectNotAvailable();
     }
 
     @Override
     public <N extends Number> UaiCriteria<T> sum(final N number, final String attributeName) {
-        return multiSelectNotAvailable();
+        return multiselectNotAvailable();
     }
 
     @Override
     public UaiCriteria<T> diff(final String firstAttribute, final String secondAttribute) {
-        return multiSelectNotAvailable();
+        return multiselectNotAvailable();
     }
 
     @Override
     public <N extends Number> UaiCriteria<T> diff(final String attributeName, final N number) {
-        return multiSelectNotAvailable();
+        return multiselectNotAvailable();
     }
 
     @Override
     public <N extends Number> UaiCriteria<T> diff(final N number, final String attributeName) {
-        return multiSelectNotAvailable();
+        return multiselectNotAvailable();
     }
 
     @Override
     public UaiCriteria<T> multiply(final String firstAttribute, final String secondAttribute) {
-        return multiSelectNotAvailable();
+        return multiselectNotAvailable();
     }
 
     @Override
     public <N extends Number> UaiCriteria<T> multiply(final String attributeName, final N number) {
-        return multiSelectNotAvailable();
+        return multiselectNotAvailable();
     }
 
     @Override
     public <N extends Number> UaiCriteria<T> multiply(final N number, final String attributeName) {
-        return multiSelectNotAvailable();
+        return multiselectNotAvailable();
     }
 
     @Override
     public UaiCriteria<T> divide(final String firstAttribute, final String secondAttribute) {
-        return multiSelectNotAvailable();
+        return multiselectNotAvailable();
     }
 
     @Override
     public <N extends Number> UaiCriteria<T> divide(final String attributeName, final N number) {
-        return multiSelectNotAvailable();
+        return multiselectNotAvailable();
     }
 
     @Override
     public <N extends Number> UaiCriteria<T> divide(final N number, final String attributeName) {
-        return multiSelectNotAvailable();
+        return multiselectNotAvailable();
     }
 
     @Override
     public UaiCriteria<T> module(final String firstAttribute, final String secondAttribute) {
-        return multiSelectNotAvailable();
+        return multiselectNotAvailable();
     }
 
     @Override
     public UaiCriteria<T> module(final String attributeName, final Integer number) {
-        return multiSelectNotAvailable();
+        return multiselectNotAvailable();
     }
 
     @Override
     public UaiCriteria<T> module(final Integer number, final String attributeName) {
-        return multiSelectNotAvailable();
+        return multiselectNotAvailable();
     }
 
     @Override
     public UaiCriteria<T> average(final String... attributeNameArray) {
-        return multiSelectNotAvailable();
+        return multiselectNotAvailable();
     }
 
     @Override
     public UaiCriteria<T> square(final String... attributeNameArray) {
-        return multiSelectNotAvailable();
+        return multiselectNotAvailable();
     }
 
     @Override
     public UaiCriteria<T> addMultiSelectAttribute(final String... attributeNameArray) {
-        return multiSelectNotAvailable();
+        return multiselectNotAvailable();
     }
 
     @Override
     public UaiCriteria<T> groupBy(final String... attributeNameArray) {
-        return multiSelectNotAvailable();
+        return multiselectNotAvailable();
     }
 
     public Subquery getSubQuery() {

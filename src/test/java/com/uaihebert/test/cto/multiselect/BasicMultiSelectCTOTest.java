@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * */
-package com.uaihebert.test.cto.multiSelect;
+package com.uaihebert.test.cto.multiselect;
 
 import com.uaihebert.model.test.RegularEntityOne;
 import com.uaihebert.test.MultiSelectAbstractTest;
@@ -21,46 +21,52 @@ import com.uaihebert.uaicriteria.UaiCriteria;
 import com.uaihebert.uaicriteria.UaiCriteriaFactory;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+public class BasicMultiSelectCTOTest extends MultiSelectAbstractTest {
 
-public class CountMultiSelectCTOTest extends MultiSelectAbstractTest {
+    @Test(expected = IllegalStateException.class)
+    public void isRaisingExceptionIfGetMultiSelectResultIsInvokedFromCTO() {
+        final UaiCriteria<RegularEntityOne> cto = UaiCriteriaFactory.createQueryUaiCTO();
+        cto.getMultiSelectResult();
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void isRaisingExceptionIfMultiSelectInvokedWithoutAttributesOrExpressions() {
+        if (isBatoo()) {
+            throw new IllegalStateException();
+        }
+
+        final UaiCriteria<RegularEntityOne> uaiCriteria = createMultiSelectCriteria(RegularEntityOne.class);
+        uaiCriteria.getMultiSelectResult();
+    }
 
     @Test
-    public void isCountingAttributeWorking() {
+    public void isAddingGroupByToRegularQuery() {
         if (isBatoo()) {
             return;
         }
 
-        final UaiCriteria<RegularEntityOne> uaiCriteria = createMultiSelectCriteria(RegularEntityOne.class);
-        uaiCriteria.countAttribute("id");
-
-        final Long criteriaCount = extractResult(uaiCriteria, Long.class);
+        final UaiCriteria<RegularEntityOne> uaiCriteria = createCriteria(RegularEntityOne.class);
+        uaiCriteria.groupBy("id");
 
         final UaiCriteria<RegularEntityOne> cto = UaiCriteriaFactory.createQueryUaiCTO();
-        cto.countAttribute("id");
+        cto.groupBy("id");
 
-        final UaiCriteria<RegularEntityOne> uaiCriteriaCTO = createMultiSelectCriteria(RegularEntityOne.class, cto);
+        final UaiCriteria<RegularEntityOne> uaiCriteriaCTO = createCriteria(RegularEntityOne.class, cto);
 
-        final Long uaiCTOCount = extractResult(uaiCriteriaCTO, Long.class);
-
-        assertEquals("making sure that the sum has the same value", criteriaCount, uaiCTOCount);
+        validateTestLists(uaiCriteria.getResultList(), uaiCriteriaCTO.getResultList());
     }
 
     @Test
-    public void isMultiSelectWorkingWithSeveralGroupByAttributesAndSumFunction() {
+    public void isMultiSelectWorkingWithSeveralAttributes() {
         if (isBatoo()) {
             return;
         }
 
         final UaiCriteria<RegularEntityOne> uaiCriteria = createMultiSelectCriteria(RegularEntityOne.class);
         uaiCriteria.addMultiSelectAttribute("id", "stringAttribute", "floatAttributeOne", "dateAttributeTwo");
-        uaiCriteria.countAttribute("id");
-        uaiCriteria.groupBy("id", "stringAttribute", "floatAttributeOne", "dateAttributeTwo");
 
         final UaiCriteria<RegularEntityOne> cto = UaiCriteriaFactory.createQueryUaiCTO();
         cto.addMultiSelectAttribute("id", "stringAttribute", "floatAttributeOne", "dateAttributeTwo");
-        cto.countAttribute("id");
-        cto.groupBy("id", "stringAttribute", "floatAttributeOne", "dateAttributeTwo");
 
         final UaiCriteria<RegularEntityOne> uaiCriteriaCTO = createMultiSelectCriteria(RegularEntityOne.class, cto);
 

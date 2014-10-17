@@ -13,25 +13,52 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * */
-package com.uaihebert.test.uaicriteria.multiSelect;
+package com.uaihebert.test.uaicriteria.multiselect;
 
 import com.uaihebert.model.test.RegularEntityOne;
 import com.uaihebert.test.MultiSelectAbstractTest;
 import com.uaihebert.uaicriteria.UaiCriteria;
 import org.junit.Test;
 
-public class ModuleMultiSelectTest extends MultiSelectAbstractTest {
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
+public class SumMultiSelectTest extends MultiSelectAbstractTest {
 
     @Test
-    public void isMethodInvokedWithTwoParameters() {
+    public void isSumMethodInvokedWithOneParameterOnly() {
         if (isBatoo()) {
             return;
         }
 
-        final String query = "select r.id, mod(r.id, r.integerAttributeOne) from RegularEntityOne r";
+        final String query = "select sum(r.id) from RegularEntityOne r";
+
+        final List<Object> resultFromJPQL = jpqlHelper.getListFromJPQL(query, Object.class);
+        final Long jpqlSum = (Long) resultFromJPQL.get(0);
+
+        assertTrue("making sure that the sum worked", jpqlSum > 0);
 
         final UaiCriteria<RegularEntityOne> uaiCriteria = createMultiSelectCriteria(RegularEntityOne.class);
-        uaiCriteria.addMultiSelectAttribute("id").module("id", "integerAttributeOne");
+        uaiCriteria.sum("id");
+
+        final Long criteriaSum = extractResult(uaiCriteria, Long.class);
+
+        assertEquals("making sure that the sum has the same value", jpqlSum, criteriaSum);
+    }
+
+    @Test
+    public void isSumMethodInvokedWithTwoParameters() {
+        if (isBatoo()) {
+            return;
+        }
+
+        final String query = "select r.id, sum(r.id) from RegularEntityOne r group by r.id";
+
+        final UaiCriteria<RegularEntityOne> uaiCriteria = createMultiSelectCriteria(RegularEntityOne.class);
+        uaiCriteria.addMultiSelectAttribute("id").sum("id");
+        uaiCriteria.groupBy("id");
 
         if (isEclipselink()) {
             validateResultWithVector(query, uaiCriteria);
@@ -42,20 +69,24 @@ public class ModuleMultiSelectTest extends MultiSelectAbstractTest {
     }
 
     @Test
-    public void isMultiSelectWorkingWithSeveralAttributesAndFunction() {
+    public void isMultiSelectWorkingWithSeveralGroupByAttributesAndSumFunction() {
         if (isBatoo()) {
             return;
         }
 
-        final String query = "select r.id, mod(r.id, r.integerAttributeOne), r.stringAttribute, r.floatAttributeOne, " +
-                "r.dateAttributeTwo from RegularEntityOne r ";
+        final String query = "select r.id, sum(r.id), r.stringAttribute, r.floatAttributeOne, " +
+                "r.dateAttributeTwo from RegularEntityOne r group by r.id, r.stringAttribute, " +
+                "r.floatAttributeOne, r.dateAttributeTwo";
 
         final UaiCriteria<RegularEntityOne> uaiCriteria = createMultiSelectCriteria(RegularEntityOne.class);
         uaiCriteria.addMultiSelectAttribute("id")
-                .module("id", "integerAttributeOne")
+                .sum("id")
                 .addMultiSelectAttribute("stringAttribute")
                 .addMultiSelectAttribute("floatAttributeOne")
                 .addMultiSelectAttribute("dateAttributeTwo");
+        uaiCriteria.groupBy("id", "stringAttribute", "floatAttributeOne")
+                .groupBy("dateAttributeTwo");
+
 
         if (isEclipselink()) {
             validateResultWithVector(query, uaiCriteria);
@@ -66,19 +97,22 @@ public class ModuleMultiSelectTest extends MultiSelectAbstractTest {
     }
 
     @Test
-    public void isDiffNumberFromAttribute() {
+    public void isAddingAttributeToANumber() {
         if (isBatoo()) {
             return;
         }
 
-        final String query = "select r.id, mod(r.id, 10), r.stringAttribute, r.floatAttributeOne, " +
-                "r.dateAttributeTwo from RegularEntityOne r ";
+        final String query = "select r.id, sum(r.id+10), r.stringAttribute, r.floatAttributeOne, " +
+                "r.dateAttributeTwo from RegularEntityOne r group by r.id, r.stringAttribute, " +
+                "r.floatAttributeOne, r.dateAttributeTwo";
 
         final UaiCriteria<RegularEntityOne> uaiCriteria = createMultiSelectCriteria(RegularEntityOne.class);
         uaiCriteria.addMultiSelectAttribute("id")
-                .module("id", 10)
+                .sum("id", 10)
                 .addMultiSelectAttribute("stringAttribute", "floatAttributeOne")
                 .addMultiSelectAttribute("dateAttributeTwo");
+        uaiCriteria.groupBy("id", "stringAttribute", "floatAttributeOne")
+                .groupBy("dateAttributeTwo");
 
         if (isEclipselink()) {
             validateResultWithVector(query, uaiCriteria);
@@ -89,19 +123,22 @@ public class ModuleMultiSelectTest extends MultiSelectAbstractTest {
     }
 
     @Test
-    public void isDiffAttributeFromNumber() {
+    public void isAddingNumberToAAttribute() {
         if (isBatoo()) {
             return;
         }
 
-        final String query = "select r.id, mod(10, r.id), r.stringAttribute, r.floatAttributeOne, " +
-                "r.dateAttributeTwo from RegularEntityOne r ";
+        final String query = "select r.id, sum(10 + r.id), r.stringAttribute, r.floatAttributeOne, " +
+                "r.dateAttributeTwo from RegularEntityOne r group by r.id, r.stringAttribute, " +
+                "r.floatAttributeOne, r.dateAttributeTwo";
 
         final UaiCriteria<RegularEntityOne> uaiCriteria = createMultiSelectCriteria(RegularEntityOne.class);
         uaiCriteria.addMultiSelectAttribute("id")
-                .module(10, "id")
+                .sum(10, "id")
                 .addMultiSelectAttribute("stringAttribute", "floatAttributeOne")
                 .addMultiSelectAttribute("dateAttributeTwo");
+        uaiCriteria.groupBy("id", "stringAttribute", "floatAttributeOne")
+                .groupBy("dateAttributeTwo");
 
         if (isEclipselink()) {
             validateResultWithVector(query, uaiCriteria);

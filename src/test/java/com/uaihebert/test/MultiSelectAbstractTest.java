@@ -48,31 +48,31 @@ public class MultiSelectAbstractTest extends AbstractTest {
         final List<Object> resultFromJPQL = jpqlHelper.getListFromJPQL(query, Object.class);
         final Vector jpqlVector = (Vector) resultFromJPQL;
 
-        assertTrue("making sure that the multiSelect worked", jpqlVector.size() > 1);
+        assertTrue("making sure that the multiselect worked", jpqlVector.size() > 1);
 
-        final Vector multiSelectVector = (Vector) uaiCriteria.getMultiSelectResult();
+        final Vector multiselectVector = (Vector) uaiCriteria.getMultiSelectResult();
 
-        assertEquals("making sure that the multiSelect has the same value", jpqlVector.size(), multiSelectVector.size());
+        assertEquals("making sure that the multiselect has the same value", jpqlVector.size(), multiselectVector.size());
 
-        validateListResult(jpqlVector, multiSelectVector);
+        validateListResult(jpqlVector, multiselectVector);
     }
 
-    protected void validateListResult(final List jpqlVector, final List multiSelectVector, final OpenJpaIndexToConvert... convertIndex) {
+    protected void validateListResult(final List jpqlVector, final List multiselectVector, final OpenJpaIndexToConvert... convertIndex) {
         for (int i = 0; i < jpqlVector.size(); i++) {
             final Object[] jpqlLine = (Object[]) jpqlVector.get(i);
-            final Object[] multiSelectLine = (Object[]) multiSelectVector.get(i);
+            final Object[] multiselectLine = (Object[]) multiselectVector.get(i);
 
             if (isOpenJPA()) {
                 // open JPA is returning long/int values in the avg attributes
                 if (convertIndex.length == 0 || OpenJpaIndexToConvert.NONE.equals(convertIndex)) {
                     // for some reason is returning long for jpql and int for criteria
-                    assertEquals(jpqlLine[0], multiSelectLine[0]);
+                    assertEquals(jpqlLine[0], multiselectLine[0]);
                     try {
                         // for jpql is returning long and criteria big decimal
-                        assertEquals(new BigDecimal(jpqlLine[0].toString()), new BigDecimal(multiSelectLine[0].toString()));
+                        assertEquals(new BigDecimal(jpqlLine[0].toString()), new BigDecimal(multiselectLine[0].toString()));
                     } catch (final NumberFormatException nfe) {
                         try {
-                            assertEquals(jpqlLine[0], multiSelectLine[0]);
+                            assertEquals(jpqlLine[0], multiselectLine[0]);
                         } catch (final Exception ex) {
                             fail("Could not parse query result");
                         }
@@ -81,20 +81,20 @@ public class MultiSelectAbstractTest extends AbstractTest {
                 }
 
                 if (convertIndex.length > 0 && i == 1 && Arrays.asList(convertIndex).contains(OpenJpaIndexToConvert.SECOND)) {
-                    assertEquals(Double.valueOf(jpqlLine[1].toString()), Double.valueOf(multiSelectLine[1].toString()));
+                    assertEquals(Double.valueOf(jpqlLine[1].toString()), Double.valueOf(multiselectLine[1].toString()));
                 }
             } else {
                 // for some reason the eclipslink is returning null values
-                if (jpqlLine[1] == null && multiSelectLine[1] == null) {
+                if (jpqlLine[1] == null && multiselectLine[1] == null) {
                     continue;
                 }
 
                 try {
                     // for jpql is returning long and criteria big decimal
-                    assertEquals(new BigDecimal(jpqlLine[1].toString()), new BigDecimal(multiSelectLine[1].toString()));
+                    assertEquals(new BigDecimal(jpqlLine[1].toString()), new BigDecimal(multiselectLine[1].toString()));
                 } catch (final NumberFormatException nfe) {
                     try {
-                        assertEquals(jpqlLine[1], multiSelectLine[1]);
+                        assertEquals(jpqlLine[1], multiselectLine[1]);
                     } catch (final Exception ex) {
                         fail("Could not parse query result");
                     }
@@ -108,10 +108,10 @@ public class MultiSelectAbstractTest extends AbstractTest {
 
         assertTrue("making sure that the sum worked", jpqlList.size() > 1);
 
-        final List multiSelectList = uaiCriteria.getMultiSelectResult();
+        final List multiselectList = uaiCriteria.getMultiSelectResult();
 
-        assertEquals("making sure that the sum has the same value", jpqlList.size(), multiSelectList.size());
+        assertEquals("making sure that the sum has the same value", jpqlList.size(), multiselectList.size());
 
-        validateListResult(jpqlList, multiSelectList);
+        validateListResult(jpqlList, multiselectList);
     }
 }

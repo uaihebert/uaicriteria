@@ -50,7 +50,7 @@ public class BaseCriteria<T> {
 
     private final List<Predicate> createdPredicateList = new ArrayList<Predicate>();
 
-    private final List<Expression> multiSelectSelectList = new ArrayList<Expression>();
+    private final List<Expression> multiselectSelectList = new ArrayList<Expression>();
     private final List<Expression> groupByList = new ArrayList<Expression>();
 
     private final Map<Integer, List<Predicate>> orPredicateMap = new HashMap<Integer, List<Predicate>>();
@@ -314,21 +314,21 @@ public class BaseCriteria<T> {
             return;
         }
 
-        final Expression[] multiSelectGroupByArray = new Expression[groupByList.size()];
-        groupByList.toArray(multiSelectGroupByArray);
+        final Expression[] multiselectGroupByArray = new Expression[groupByList.size()];
+        groupByList.toArray(multiselectGroupByArray);
 
-        getCriteriaQuery().groupBy(multiSelectGroupByArray);
+        getCriteriaQuery().groupBy(multiselectGroupByArray);
     }
 
     private void addMultiSelectMultiSelectValues() {
-        if (multiSelectSelectList.isEmpty()) {
-            throw new IllegalStateException("You want to extract a multiSelect query, but you have not added any attribute or method to the query");
+        if (multiselectSelectList.isEmpty()) {
+            throw new IllegalStateException("You want to extract a multiselect query, but you have not added any attribute or method to the query");
         }
 
-        final Selection[] multiSelectSelectArray = new Selection[multiSelectSelectList.size()];
-        multiSelectSelectList.toArray(multiSelectSelectArray);
+        final Selection[] multiselectSelectArray = new Selection[multiselectSelectList.size()];
+        multiselectSelectList.toArray(multiselectSelectArray);
 
-        getConvertedCriteriaQuery().multiselect(multiSelectSelectArray);
+        getConvertedCriteriaQuery().multiselect(multiselectSelectArray);
     }
 
     private void useCountDistinctInsteadOfQueryDistinct() {
@@ -336,12 +336,12 @@ public class BaseCriteria<T> {
         getCountCriteriaQuery().select(criteriaBuilder.countDistinct(root));
     }
 
-    public void addMultiSelectOperationExpression(final Expression multiSelectPredicate) {
-        multiSelectSelectList.add(multiSelectPredicate);
+    public void addMultiSelectOperationExpression(final Expression multiselectPredicate) {
+        multiselectSelectList.add(multiselectPredicate);
     }
 
-    public void addMultiSelectPathException(final Expression multiSelectPredicate) {
-        multiSelectSelectList.add(multiSelectPredicate);
+    public void addMultiSelectPathException(final Expression multiselectPredicate) {
+        multiselectSelectList.add(multiselectPredicate);
     }
 
     public void groupBy(final Path attributeToGroup) {

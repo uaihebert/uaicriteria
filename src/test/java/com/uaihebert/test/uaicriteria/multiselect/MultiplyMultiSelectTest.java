@@ -13,52 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * */
-package com.uaihebert.test.uaicriteria.multiSelect;
+package com.uaihebert.test.uaicriteria.multiselect;
 
 import com.uaihebert.model.test.RegularEntityOne;
 import com.uaihebert.test.MultiSelectAbstractTest;
 import com.uaihebert.uaicriteria.UaiCriteria;
 import org.junit.Test;
 
-import java.util.List;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
-public class SumMultiSelectTest extends MultiSelectAbstractTest {
+public class MultiplyMultiSelectTest extends MultiSelectAbstractTest {
 
     @Test
-    public void isSumMethodInvokedWithOneParameterOnly() {
+    public void isMethodInvokedWithTwoParameters() {
         if (isBatoo()) {
             return;
         }
 
-        final String query = "select sum(r.id) from RegularEntityOne r";
-
-        final List<Object> resultFromJPQL = jpqlHelper.getListFromJPQL(query, Object.class);
-        final Long jpqlSum = (Long) resultFromJPQL.get(0);
-
-        assertTrue("making sure that the sum worked", jpqlSum > 0);
+        final String query = "select r.id, (r.id * r.integerAttributeOne) from RegularEntityOne r";
 
         final UaiCriteria<RegularEntityOne> uaiCriteria = createMultiSelectCriteria(RegularEntityOne.class);
-        uaiCriteria.sum("id");
-
-        final Long criteriaSum = extractResult(uaiCriteria, Long.class);
-
-        assertEquals("making sure that the sum has the same value", jpqlSum, criteriaSum);
-    }
-
-    @Test
-    public void isSumMethodInvokedWithTwoParameters() {
-        if (isBatoo()) {
-            return;
-        }
-
-        final String query = "select r.id, sum(r.id) from RegularEntityOne r group by r.id";
-
-        final UaiCriteria<RegularEntityOne> uaiCriteria = createMultiSelectCriteria(RegularEntityOne.class);
-        uaiCriteria.addMultiSelectAttribute("id").sum("id");
-        uaiCriteria.groupBy("id");
+        uaiCriteria.addMultiSelectAttribute("id").multiply("id", "integerAttributeOne");
 
         if (isEclipselink()) {
             validateResultWithVector(query, uaiCriteria);
@@ -69,24 +42,20 @@ public class SumMultiSelectTest extends MultiSelectAbstractTest {
     }
 
     @Test
-    public void isMultiSelectWorkingWithSeveralGroupByAttributesAndSumFunction() {
+    public void isMultiSelectWorkingWithSeveralAttributesAndFunction() {
         if (isBatoo()) {
             return;
         }
 
-        final String query = "select r.id, sum(r.id), r.stringAttribute, r.floatAttributeOne, " +
-                "r.dateAttributeTwo from RegularEntityOne r group by r.id, r.stringAttribute, " +
-                "r.floatAttributeOne, r.dateAttributeTwo";
+        final String query = "select r.id, (r.id * r.integerAttributeOne), r.stringAttribute, r.floatAttributeOne, " +
+                "r.dateAttributeTwo from RegularEntityOne r ";
 
         final UaiCriteria<RegularEntityOne> uaiCriteria = createMultiSelectCriteria(RegularEntityOne.class);
         uaiCriteria.addMultiSelectAttribute("id")
-                .sum("id")
+                .multiply("id", "integerAttributeOne")
                 .addMultiSelectAttribute("stringAttribute")
                 .addMultiSelectAttribute("floatAttributeOne")
                 .addMultiSelectAttribute("dateAttributeTwo");
-        uaiCriteria.groupBy("id", "stringAttribute", "floatAttributeOne")
-                .groupBy("dateAttributeTwo");
-
 
         if (isEclipselink()) {
             validateResultWithVector(query, uaiCriteria);
@@ -97,22 +66,19 @@ public class SumMultiSelectTest extends MultiSelectAbstractTest {
     }
 
     @Test
-    public void isAddingAttributeToANumber() {
+    public void isDiffNumberFromAttribute() {
         if (isBatoo()) {
             return;
         }
 
-        final String query = "select r.id, sum(r.id+10), r.stringAttribute, r.floatAttributeOne, " +
-                "r.dateAttributeTwo from RegularEntityOne r group by r.id, r.stringAttribute, " +
-                "r.floatAttributeOne, r.dateAttributeTwo";
+        final String query = "select r.id, (r.id * 10), r.stringAttribute, r.floatAttributeOne, " +
+                "r.dateAttributeTwo from RegularEntityOne r ";
 
         final UaiCriteria<RegularEntityOne> uaiCriteria = createMultiSelectCriteria(RegularEntityOne.class);
         uaiCriteria.addMultiSelectAttribute("id")
-                .sum("id", 10)
+                .multiply("id", 10L)
                 .addMultiSelectAttribute("stringAttribute", "floatAttributeOne")
                 .addMultiSelectAttribute("dateAttributeTwo");
-        uaiCriteria.groupBy("id", "stringAttribute", "floatAttributeOne")
-                .groupBy("dateAttributeTwo");
 
         if (isEclipselink()) {
             validateResultWithVector(query, uaiCriteria);
@@ -123,22 +89,19 @@ public class SumMultiSelectTest extends MultiSelectAbstractTest {
     }
 
     @Test
-    public void isAddingNumberToAAttribute() {
+    public void isDiffAttributeFromNumber() {
         if (isBatoo()) {
             return;
         }
 
-        final String query = "select r.id, sum(10 + r.id), r.stringAttribute, r.floatAttributeOne, " +
-                "r.dateAttributeTwo from RegularEntityOne r group by r.id, r.stringAttribute, " +
-                "r.floatAttributeOne, r.dateAttributeTwo";
+        final String query = "select r.id, (10 * r.id), r.stringAttribute, r.floatAttributeOne, " +
+                "r.dateAttributeTwo from RegularEntityOne r ";
 
         final UaiCriteria<RegularEntityOne> uaiCriteria = createMultiSelectCriteria(RegularEntityOne.class);
         uaiCriteria.addMultiSelectAttribute("id")
-                .sum(10, "id")
+                .multiply(10L, "id")
                 .addMultiSelectAttribute("stringAttribute", "floatAttributeOne")
                 .addMultiSelectAttribute("dateAttributeTwo");
-        uaiCriteria.groupBy("id", "stringAttribute", "floatAttributeOne")
-                .groupBy("dateAttributeTwo");
 
         if (isEclipselink()) {
             validateResultWithVector(query, uaiCriteria);

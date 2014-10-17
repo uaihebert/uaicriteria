@@ -13,14 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * */
-package com.uaihebert.test.uaicriteria.multiSelect;
+package com.uaihebert.test.uaicriteria.multiselect;
 
 import com.uaihebert.model.test.RegularEntityOne;
 import com.uaihebert.test.MultiSelectAbstractTest;
 import com.uaihebert.uaicriteria.UaiCriteria;
 import org.junit.Test;
 
-public class DiffMultiSelectTest extends MultiSelectAbstractTest {
+public class DivideMultiSelectTest extends MultiSelectAbstractTest {
 
     @Test
     public void isMethodInvokedWithTwoParameters() {
@@ -28,10 +28,10 @@ public class DiffMultiSelectTest extends MultiSelectAbstractTest {
             return;
         }
 
-        final String query = "select r.id, (r.id - r.integerAttributeOne) from RegularEntityOne r";
+        final String query = "select r.id, (r.id / r.longAttributeOne) from RegularEntityOne r";
 
         final UaiCriteria<RegularEntityOne> uaiCriteria = createMultiSelectCriteria(RegularEntityOne.class);
-        uaiCriteria.addMultiSelectAttribute("id").diff("id", "integerAttributeOne");
+        uaiCriteria.addMultiSelectAttribute("id").divide("id", "longAttributeOne");
 
         if (isEclipselink()) {
             validateResultWithVector(query, uaiCriteria);
@@ -47,12 +47,12 @@ public class DiffMultiSelectTest extends MultiSelectAbstractTest {
             return;
         }
 
-        final String query = "select r.id, (r.id - r.integerAttributeOne), r.stringAttribute, r.floatAttributeOne, " +
+        final String query = "select r.id, (r.id / r.integerAttributeOne), r.stringAttribute, r.floatAttributeOne, " +
                 "r.dateAttributeTwo from RegularEntityOne r ";
 
         final UaiCriteria<RegularEntityOne> uaiCriteria = createMultiSelectCriteria(RegularEntityOne.class);
         uaiCriteria.addMultiSelectAttribute("id")
-                .diff("id", "integerAttributeOne")
+                .divide("id", "integerAttributeOne")
                 .addMultiSelectAttribute("stringAttribute")
                 .addMultiSelectAttribute("floatAttributeOne")
                 .addMultiSelectAttribute("dateAttributeTwo");
@@ -71,12 +71,12 @@ public class DiffMultiSelectTest extends MultiSelectAbstractTest {
             return;
         }
 
-        final String query = "select r.id, (r.id - 10), r.stringAttribute, r.floatAttributeOne, " +
+        final String query = "select r.id, (r.id / 10), r.stringAttribute, r.floatAttributeOne, " +
                 "r.dateAttributeTwo from RegularEntityOne r ";
 
         final UaiCriteria<RegularEntityOne> uaiCriteria = createMultiSelectCriteria(RegularEntityOne.class);
         uaiCriteria.addMultiSelectAttribute("id")
-                .diff("id", 10L)
+                .divide("id", 10L)
                 .addMultiSelectAttribute("stringAttribute", "floatAttributeOne")
                 .addMultiSelectAttribute("dateAttributeTwo");
 
@@ -94,12 +94,12 @@ public class DiffMultiSelectTest extends MultiSelectAbstractTest {
             return;
         }
 
-        final String query = "select r.id, (10 - r.id), r.stringAttribute, r.floatAttributeOne, " +
+        final String query = "select r.id, (10 / r.id), r.stringAttribute, r.floatAttributeOne, " +
                 "r.dateAttributeTwo from RegularEntityOne r ";
 
         final UaiCriteria<RegularEntityOne> uaiCriteria = createMultiSelectCriteria(RegularEntityOne.class);
         uaiCriteria.addMultiSelectAttribute("id")
-                .diff(10L, "id")
+                .divide(10L, "id")
                 .addMultiSelectAttribute("stringAttribute", "floatAttributeOne")
                 .addMultiSelectAttribute("dateAttributeTwo");
 

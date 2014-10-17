@@ -2,6 +2,8 @@
 * abrir bug do is empty para map do hibernate
 * abrir bug enum, sum in (e outros) para batoo
 
+* criar criação de classe wrapper na hora do build (PersonWrapper) ou Tuple
+
 * Criar CriteriaDataHolder
 
 * criar where property 1 like '%A%' and property 1 like 'B'  OR property 2 like '%A%' and property 2 like 'B'
@@ -10,7 +12,7 @@
 
 * case in query
 
-* @Embeddable com classes normais, algo como pessoa tem endereço
+* criar testes para @Embeddable com classes normais, algo como pessoa tem endereço
 
 * distinct em outros atributos que não o ID, como: Select distinct modelo from carros;
 

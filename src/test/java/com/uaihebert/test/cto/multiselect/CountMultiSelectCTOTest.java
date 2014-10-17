@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * */
-package com.uaihebert.test.cto.multiSelect;
+package com.uaihebert.test.cto.multiselect;
 
 import com.uaihebert.model.test.RegularEntityOne;
 import com.uaihebert.test.MultiSelectAbstractTest;
@@ -23,46 +23,27 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class SquareMultiSelectCTOTest extends MultiSelectAbstractTest {
+public class CountMultiSelectCTOTest extends MultiSelectAbstractTest {
 
     @Test
-    public void isSquareMethodInvokedWithOneParameterOnly() {
+    public void isCountingAttributeWorking() {
         if (isBatoo()) {
             return;
         }
 
         final UaiCriteria<RegularEntityOne> uaiCriteria = createMultiSelectCriteria(RegularEntityOne.class);
-        uaiCriteria.square("id");
+        uaiCriteria.countAttribute("id");
 
-        final Double criteriaSquare = extractResult(uaiCriteria, Double.class);
+        final Long criteriaCount = extractResult(uaiCriteria, Long.class);
 
         final UaiCriteria<RegularEntityOne> cto = UaiCriteriaFactory.createQueryUaiCTO();
-        cto.square("id");
+        cto.countAttribute("id");
 
         final UaiCriteria<RegularEntityOne> uaiCriteriaCTO = createMultiSelectCriteria(RegularEntityOne.class, cto);
 
-        final Double criteriaSquareCTO = extractResult(uaiCriteriaCTO, Double.class);
+        final Long uaiCTOCount = extractResult(uaiCriteriaCTO, Long.class);
 
-        assertEquals("making sure that the square has the same value", criteriaSquare, criteriaSquareCTO);
-    }
-
-    @Test
-    public void isSumMethodInvokedWithTwoParameters() {
-        if (isBatoo()) {
-            return;
-        }
-
-        final UaiCriteria<RegularEntityOne> uaiCriteria = createMultiSelectCriteria(RegularEntityOne.class);
-        uaiCriteria.addMultiSelectAttribute("id").square("id");
-        uaiCriteria.groupBy("id");
-
-        final UaiCriteria<RegularEntityOne> cto = UaiCriteriaFactory.createQueryUaiCTO();
-        cto.addMultiSelectAttribute("id").square("id");
-        cto.groupBy("id");
-
-        final UaiCriteria<RegularEntityOne> uaiCriteriaCTO = createMultiSelectCriteria(RegularEntityOne.class, cto);
-
-        validateListResult(uaiCriteria.getMultiSelectResult(), uaiCriteriaCTO.getMultiSelectResult());
+        assertEquals("making sure that the sum has the same value", criteriaCount, uaiCTOCount);
     }
 
     @Test
@@ -72,20 +53,17 @@ public class SquareMultiSelectCTOTest extends MultiSelectAbstractTest {
         }
 
         final UaiCriteria<RegularEntityOne> uaiCriteria = createMultiSelectCriteria(RegularEntityOne.class);
-        uaiCriteria.addMultiSelectAttribute("id", "stringAttribute", "floatAttributeOne", "dateAttributeTwo")
-                .square("id");
-        uaiCriteria.groupBy("id", "stringAttribute", "floatAttributeOne")
-                .groupBy("dateAttributeTwo");
+        uaiCriteria.addMultiSelectAttribute("id", "stringAttribute", "floatAttributeOne", "dateAttributeTwo");
+        uaiCriteria.countAttribute("id");
+        uaiCriteria.groupBy("id", "stringAttribute", "floatAttributeOne", "dateAttributeTwo");
 
         final UaiCriteria<RegularEntityOne> cto = UaiCriteriaFactory.createQueryUaiCTO();
-        cto.addMultiSelectAttribute("id", "stringAttribute", "floatAttributeOne", "dateAttributeTwo")
-                .square("id");
-        cto.groupBy("id", "stringAttribute", "floatAttributeOne")
-                .groupBy("dateAttributeTwo");
+        cto.addMultiSelectAttribute("id", "stringAttribute", "floatAttributeOne", "dateAttributeTwo");
+        cto.countAttribute("id");
+        cto.groupBy("id", "stringAttribute", "floatAttributeOne", "dateAttributeTwo");
 
         final UaiCriteria<RegularEntityOne> uaiCriteriaCTO = createMultiSelectCriteria(RegularEntityOne.class, cto);
 
         validateListResult(uaiCriteria.getMultiSelectResult(), uaiCriteriaCTO.getMultiSelectResult());
-
     }
 }

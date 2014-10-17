@@ -29,7 +29,7 @@ public class BasicCriteriaElements<T> {
     EntityManager entityManager;
 
     private BaseCriteria countCriteria;
-    private BaseCriteria multiSelectCriteria;
+    private BaseCriteria multiselectCriteria;
     private BaseCriteria regularCriteria;
     private BaseCriteria subQueryCriteria;
 
@@ -37,7 +37,7 @@ public class BasicCriteriaElements<T> {
 
     public TypedQuery<T> getRegularQuery() {
         if (regularCriteria == null) {
-            throw new IllegalStateException("You cannot get a regular query when you create a multiSelect query");
+            throw new IllegalStateException("You cannot get a regular query when you create a multiselect query");
         }
 
         regularCriteria.setUpCriteria();
@@ -55,8 +55,8 @@ public class BasicCriteriaElements<T> {
     }
 
     public TypedQuery<Long> getCountQuery() {
-        if (multiSelectCriteria != null) {
-            throw new IllegalStateException("You cannot get a count from multiSelect query. \n If you want to count, you should use the method that will count an attribute");
+        if (multiselectCriteria != null) {
+            throw new IllegalStateException("You cannot get a count from multiselect query. \n If you want to count, you should use the method that will count an attribute");
         }
 
         countCriteria.setCountSelect();
@@ -72,18 +72,18 @@ public class BasicCriteriaElements<T> {
     }
 
     public TypedQuery<Object> getMultiSelectQuery() {
-        if (multiSelectCriteria == null) {
-            throw new IllegalStateException("You cannot get a multiSelect query when you create a regular query");
+        if (multiselectCriteria == null) {
+            throw new IllegalStateException("You cannot get a multiselect query when you create a regular query");
         }
 
-        multiSelectCriteria.setMultiSelectSelect();
+        multiselectCriteria.setMultiSelectSelect();
 
-        multiSelectCriteria.setUpCriteria();
+        multiselectCriteria.setUpCriteria();
 
-        final TypedQuery<Object> typedQuery = entityManager.createQuery(multiSelectCriteria.getConvertedCriteriaQuery());
+        final TypedQuery<Object> typedQuery = entityManager.createQuery(multiselectCriteria.getConvertedCriteriaQuery());
 
         setPagination(typedQuery);
-        setUpHintMap(typedQuery, multiSelectCriteria);
+        setUpHintMap(typedQuery, multiselectCriteria);
 
         return typedQuery;
     }
@@ -135,9 +135,9 @@ public class BasicCriteriaElements<T> {
         baseCriteriaList.add(this.countCriteria);
     }
 
-    public void setMultiSelectCriteria(final BaseCriteria multiSelectCriteria) {
-        this.multiSelectCriteria = multiSelectCriteria;
-        baseCriteriaList.add(this.multiSelectCriteria);
+    public void setMultiSelectCriteria(final BaseCriteria multiselectCriteria) {
+        this.multiselectCriteria = multiselectCriteria;
+        baseCriteriaList.add(this.multiselectCriteria);
     }
 
     public void setRegularCriteria(final BaseCriteria regularCriteria) {

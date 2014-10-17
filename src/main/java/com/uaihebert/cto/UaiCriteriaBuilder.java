@@ -52,7 +52,7 @@ public final class UaiCriteriaBuilder {
     }
 
     private static <T> void addMultiSelectAttributes(final UaiCTOImp<T> uaiCTOImp, final UaiCriteriaImp<T> uaiCriteria) {
-        uaiCriteria.addMultiSelectAttribute(Arrays.copyOf(uaiCTOImp.multiSelectAttributeList.toArray(), uaiCTOImp.multiSelectAttributeList.toArray().length, String[].class));
+        uaiCriteria.addMultiSelectAttribute(Arrays.copyOf(uaiCTOImp.multiselectAttributeList.toArray(), uaiCTOImp.multiselectAttributeList.toArray().length, String[].class));
     }
 
     private static <T> void configureGroupBy(final UaiCTOImp<T> uaiCTOImp, final UaiCriteriaImp<T> uaiCriteria) {

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * */
-package com.uaihebert.test.cto.multiSelect;
+package com.uaihebert.test.cto.multiselect;
 
 import com.uaihebert.model.test.RegularEntityOne;
 import com.uaihebert.test.MultiSelectAbstractTest;
@@ -21,44 +21,19 @@ import com.uaihebert.uaicriteria.UaiCriteria;
 import com.uaihebert.uaicriteria.UaiCriteriaFactory;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-
-public class AverageMultiSelectCTOTest extends MultiSelectAbstractTest {
+public class MultiplyMultiSelectCTOTest extends MultiSelectAbstractTest {
 
     @Test
-    public void isAvgMethodInvokedWithOneParameterOnly() {
+    public void isMethodInvokedWithTwoParameters() {
         if (isBatoo()) {
             return;
         }
 
         final UaiCriteria<RegularEntityOne> uaiCriteria = createMultiSelectCriteria(RegularEntityOne.class);
-        uaiCriteria.average("id");
-
-        final Double criteriaAvg = extractResult(uaiCriteria, Double.class);
+        uaiCriteria.addMultiSelectAttribute("id").multiply("id", "longAttributeOne");
 
         final UaiCriteria<RegularEntityOne> cto = UaiCriteriaFactory.createQueryUaiCTO();
-        cto.average("id");
-
-        final UaiCriteria<RegularEntityOne> uaiCriteriaCTO = createMultiSelectCriteria(RegularEntityOne.class, cto);
-
-        final Double criteriaAvgCTO = extractResult(uaiCriteriaCTO, Double.class);
-
-        assertEquals("making sure that the average has the same value", criteriaAvg, criteriaAvgCTO);
-    }
-
-    @Test
-    public void isAverageMethodInvokedWithTwoParameters() {
-        if (isBatoo()) {
-            return;
-        }
-
-        final UaiCriteria<RegularEntityOne> uaiCriteria = createMultiSelectCriteria(RegularEntityOne.class);
-        uaiCriteria.addMultiSelectAttribute("id").average("id");
-        uaiCriteria.groupBy("id");
-
-        final UaiCriteria<RegularEntityOne> cto = UaiCriteriaFactory.createQueryUaiCTO();
-        cto.addMultiSelectAttribute("id").average("id");
-        cto.groupBy("id");
+        cto.addMultiSelectAttribute("id").multiply("id", "longAttributeOne");
 
         final UaiCriteria<RegularEntityOne> uaiCriteriaCTO = createMultiSelectCriteria(RegularEntityOne.class, cto);
 
@@ -66,26 +41,59 @@ public class AverageMultiSelectCTOTest extends MultiSelectAbstractTest {
     }
 
     @Test
-    public void isMultiSelectWorkingWithSeveralGroupByAttributesAndAverageFunction() {
+    public void isMultiSelectWorkingWithSeveralAttributesAndFunction() {
         if (isBatoo()) {
             return;
         }
 
         final UaiCriteria<RegularEntityOne> uaiCriteria = createMultiSelectCriteria(RegularEntityOne.class);
         uaiCriteria.addMultiSelectAttribute("id", "stringAttribute", "floatAttributeOne", "dateAttributeTwo")
-                .average("id");
-        uaiCriteria.groupBy("id", "stringAttribute", "floatAttributeOne")
-                .groupBy("dateAttributeTwo");
+                .multiply("id", "integerAttributeOne");
 
         final UaiCriteria<RegularEntityOne> cto = UaiCriteriaFactory.createQueryUaiCTO();
         cto.addMultiSelectAttribute("id", "stringAttribute", "floatAttributeOne", "dateAttributeTwo")
-                .average("id");
-        cto.groupBy("id", "stringAttribute", "floatAttributeOne")
-                .groupBy("dateAttributeTwo");
+                .multiply("id", "integerAttributeOne");
 
         final UaiCriteria<RegularEntityOne> uaiCriteriaCTO = createMultiSelectCriteria(RegularEntityOne.class, cto);
 
         validateListResult(uaiCriteria.getMultiSelectResult(), uaiCriteriaCTO.getMultiSelectResult());
+    }
 
+    @Test
+    public void isDiffNumberFromAttribute() {
+        if (isBatoo()) {
+            return;
+        }
+
+        final UaiCriteria<RegularEntityOne> uaiCriteria = createMultiSelectCriteria(RegularEntityOne.class);
+        uaiCriteria.addMultiSelectAttribute("id", "stringAttribute", "floatAttributeOne", "dateAttributeTwo")
+                .multiply("id", 10L);
+
+        final UaiCriteria<RegularEntityOne> cto = UaiCriteriaFactory.createQueryUaiCTO();
+        cto.addMultiSelectAttribute("id", "stringAttribute", "floatAttributeOne", "dateAttributeTwo")
+                .multiply("id", 10L);
+
+        final UaiCriteria<RegularEntityOne> uaiCriteriaCTO = createMultiSelectCriteria(RegularEntityOne.class, cto);
+
+        validateListResult(uaiCriteria.getMultiSelectResult(), uaiCriteriaCTO.getMultiSelectResult());
+    }
+
+    @Test
+    public void isDiffAttributeFromNumber() {
+        if (isBatoo()) {
+            return;
+        }
+
+        final UaiCriteria<RegularEntityOne> uaiCriteria = createMultiSelectCriteria(RegularEntityOne.class);
+        uaiCriteria.addMultiSelectAttribute("id", "stringAttribute", "floatAttributeOne", "dateAttributeTwo")
+                .multiply(10L, "id");
+
+        final UaiCriteria<RegularEntityOne> cto = UaiCriteriaFactory.createQueryUaiCTO();
+        cto.addMultiSelectAttribute("id", "stringAttribute", "floatAttributeOne", "dateAttributeTwo")
+                .multiply(10L, "id");
+
+        final UaiCriteria<RegularEntityOne> uaiCriteriaCTO = createMultiSelectCriteria(RegularEntityOne.class, cto);
+
+        validateListResult(uaiCriteria.getMultiSelectResult(), uaiCriteriaCTO.getMultiSelectResult());
     }
 }

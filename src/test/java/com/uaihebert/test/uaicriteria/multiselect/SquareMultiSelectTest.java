@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * */
-package com.uaihebert.test.uaicriteria.multiSelect;
+package com.uaihebert.test.uaicriteria.multiselect;
 
 import com.uaihebert.model.test.RegularEntityOne;
 import com.uaihebert.test.MultiSelectAbstractTest;
@@ -87,11 +87,11 @@ public class SquareMultiSelectTest extends MultiSelectAbstractTest {
 
         assertTrue("making sure that the sqrt worked", jpqlList.size() > 1);
 
-        final List multiSelectList = uaiCriteria.getMultiSelectResult();
+        final List multiselectList = uaiCriteria.getMultiSelectResult();
 
-        assertEquals("making sure that the sqrt has the same value", jpqlList.size(), multiSelectList.size());
+        assertEquals("making sure that the sqrt has the same value", jpqlList.size(), multiselectList.size());
 
-        validateListResult(jpqlList, multiSelectList, OpenJpaIndexToConvert.SECOND);
+        validateListResult(jpqlList, multiselectList, OpenJpaIndexToConvert.SECOND);
     }
 
     @Test
@@ -122,10 +122,10 @@ public class SquareMultiSelectTest extends MultiSelectAbstractTest {
 
         assertTrue("making sure that the square worked", jpqlList.size() > 1);
 
-        final List multiSelectList = uaiCriteria.getMultiSelectResult();
+        final List multiselectList = uaiCriteria.getMultiSelectResult();
 
-        assertEquals("making sure that the square has the same value", jpqlList.size(), multiSelectList.size());
+        assertEquals("making sure that the square has the same value", jpqlList.size(), multiselectList.size());
 
-        validateListResult(jpqlList, multiSelectList, OpenJpaIndexToConvert.SECOND);
+        validateListResult(jpqlList, multiselectList, OpenJpaIndexToConvert.SECOND);
     }
 }
