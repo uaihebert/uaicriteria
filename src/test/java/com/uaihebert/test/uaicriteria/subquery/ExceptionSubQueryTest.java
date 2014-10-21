@@ -75,12 +75,21 @@ public class ExceptionSubQueryTest extends AbstractTest {
     }
 
     @Test(expected = IllegalStateException.class)
-    public void isRaisingExceptionIfAttributeInWithSubQueryInvoked() {
+    public void isRaisingExceptionIfAttributeInWithSubSubQueryInvoked() {
         final UaiCriteria<RegularEntityTwo> uaiCriteria = createCriteria(RegularEntityTwo.class);
 
         final UaiCriteria<RegularEntityOne> subQuery = uaiCriteria.subQuery("id", RegularEntityOne.class);
 
         subQuery.andAttributeIn("id", subQuery);
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void isRaisingExceptionIfAttributeNotInWithSubSubQueryInvoked() {
+        final UaiCriteria<RegularEntityTwo> uaiCriteria = createCriteria(RegularEntityTwo.class);
+
+        final UaiCriteria<RegularEntityOne> subQuery = uaiCriteria.subQuery("id", RegularEntityOne.class);
+
+        subQuery.andAttributeNotIn("id", subQuery);
     }
 
     @Test(expected = IllegalStateException.class)

@@ -131,7 +131,7 @@ public class SubQueryImp<T> extends UaiCriteriaImp<T> implements UaiCriteria<T> 
 
     @Override
     public <E> UaiCriteria<T> andAttributeNotIn(final String attributeName, final UaiCriteria<E> uaiSubQuery) {
-        return null;
+        throw nestedSubQueryNotAllowed();
     }
 
     @Override
