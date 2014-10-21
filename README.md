@@ -1,7 +1,7 @@
 # uaiCriteria 
 ## How can JPA criteria became easier?
 
-### BuildStatus ---> [![Build Status](https://travis-ci.org/uaihebert/uaicriteria.svg?branch=master)](https://travis-ci.org/uaihebert/uaicriteria)
+### CodeStatus ---> [![Build Status](https://travis-ci.org/uaihebert/uaicriteria.svg?branch=master)](https://travis-ci.org/uaihebert/uaicriteria) [![Coverage Status](https://img.shields.io/coveralls/uaihebert/uaicriteria.svg)](https://coveralls.io/r/uaihebert/uaicriteria?branch=master)
 
 > Yes, your JPA Criteria can be easy. All you need to do is to add uaiCriteria in your implementation. 
 >
