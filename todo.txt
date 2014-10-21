@@ -4,6 +4,8 @@
 
 * criar criação de classe wrapper na hora do build (PersonWrapper) ou Tuple
 
+* criar api para criteria complexa
+
 * Criar CriteriaDataHolder
 
 * criar where property 1 like '%A%' and property 1 like 'B'  OR property 2 like '%A%' and property 2 like 'B'
