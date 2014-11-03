@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>uaihebert.com</groupId>
     <artifactId>uaiCriteria</artifactId>
-    <version>4.0.0-SNAPSHOT</version>
+    <version>4.1.0-SNAPSHOT</version>
     <name>uaiCriteria</name>
     <description>uaiCriteria project helps with native JPQL criteria</description>
     <url>http://uaicriteria.com</url>
