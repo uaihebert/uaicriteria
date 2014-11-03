@@ -8,6 +8,12 @@
     <description>uaiCriteria project helps with native JPQL criteria</description>
     <url>http://uaicriteria.com</url>
 
+    <scm>
+        <connection>scm:git:https://github.com/uaihebert/uaicriteria</connection>
+        <developerConnection>scm:git:https://github.com/uaihebert/uaicriteria</developerConnection>
+        <url>http://uaicriteria.com</url>
+    </scm>
+
     <licenses>
         <license>
             <name>The Apache Software License, Version 2.0</name>
@@ -51,6 +57,14 @@
         </repository>
     </repositories>
 
+    <developers>
+        <developer>
+            <id>uaiHebert</id>
+            <name>Hebert Coelho de Oliveira</name>
+            <email>contato@uaihebert.com</email>
+        </developer>
+    </developers>
+
     <contributors>
         <contributor>
             <email>contato@uaihebert.com</email>
@@ -65,6 +79,20 @@
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>1.5</version>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
