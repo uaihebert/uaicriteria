@@ -31,8 +31,8 @@ uaiCriteria.getResultList();
 ```xml
 <dependency>
     <groupId>uaihebert.com</groupId>
-    <artifactId>EasyCriteria</artifactId>
-    <version>3.0.0</version>
+    <artifactId>uaiCriteria</artifactId>
+    <version>4.0.0</version>
 </dependency>
 ```
 >
