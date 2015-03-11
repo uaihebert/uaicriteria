@@ -43,7 +43,7 @@ public class BaseCriteria<T> {
     private final CriteriaQuery<T> criteriaQuery;
     private final CriteriaBuilder criteriaBuilder;
 
-    private final Map<String, String> createdHintMap = new HashMap<String, String>();
+    private final Map<String, Object> createdHintMap = new HashMap<String, Object>();
     private final Map<String, JoinWrapper> createdJoinWrapperMap = new HashMap<String, JoinWrapper>();
 
     private final List<Order> orderByList = new ArrayList<Order>();
@@ -80,8 +80,8 @@ public class BaseCriteria<T> {
         return criteriaQuery;
     }
 
-    public Map<String, String> getCreatedHintMap() {
-        final Map<String, String> result = new HashMap<String, String>(createdHintMap);
+    public Map<String, Object> getCreatedHintMap() {
+        final Map<String, Object> result = new HashMap<String, Object>(createdHintMap);
 
         createdHintMap.clear();
 
@@ -244,7 +244,7 @@ public class BaseCriteria<T> {
         return root.get(requiredPath);
     }
 
-    public void addHint(final String key, final String value) {
+    public void addHint(final String key, final Object value) {
         createdHintMap.put(key, value);
     }
 

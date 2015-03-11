@@ -110,7 +110,7 @@ public class SubQueryImp<T> extends UaiCriteriaImp<T> implements UaiCriteria<T> 
     }
 
     @Override
-    public UaiCriteria<T> addHint(final String key, final String value) {
+    public UaiCriteria<T> addHint(final String key, final Object value) {
         throw new IllegalStateException("Hello, I am a SubQuery. If you want to add a hint, add it to the Original UaiCriteria that you instantiate. \n");
     }
 

@@ -77,7 +77,7 @@ public final class RegularQueryPathCreator extends AbstractPathCreator {
         baseCriteria.addOrdination(currentOrdination);
     }
 
-    public static void andHint(final BaseCriteria baseCriteria, final String key, final String value) {
+    public static void andHint(final BaseCriteria baseCriteria, final String key, final Object value) {
         baseCriteria.addHint(key, value);
     }
 

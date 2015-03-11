@@ -1092,7 +1092,7 @@ public interface UaiCriteria<T> {
      * @param key   hint key
      * @param value hint value
      */
-    public UaiCriteria<T> addHint(final String key, final String value);
+    public UaiCriteria<T> addHint(final String key, final Object value);
 
     /**
      * Will execute a JPQL function, the return will be an multiselect query. The JPQL would be like:

@@ -370,7 +370,7 @@ public final class UaiCTOImp<T> implements UaiCriteria<T> {
         return this;
     }
 
-    public UaiCriteria<T> addHint(final String key, final String value) {
+    public UaiCriteria<T> addHint(final String key, final Object value) {
         criteriaConditionTypeList.add(new CriteriaConditionHolder(CriteriaConditionType.HINT, key, value));
         return this;
     }

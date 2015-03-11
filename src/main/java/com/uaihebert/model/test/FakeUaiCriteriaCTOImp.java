@@ -322,7 +322,7 @@ public class FakeUaiCriteriaCTOImp<T> implements UaiCriteria<T> {
     }
 
     @Override
-    public UaiCriteria<T> addHint(final String key, final String value) {
+    public UaiCriteria<T> addHint(final String key, final Object value) {
         return null;
     }
 
