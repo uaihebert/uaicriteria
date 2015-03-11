@@ -441,7 +441,7 @@ public class UaiCriteriaImp<T> implements UaiCriteria<T> {
     }
 
     @Override
-    public UaiCriteria<T> addHint(final String key, final String value) {
+    public UaiCriteria<T> addHint(final String key, final Object value) {
         criteriaCreator.addHint(key, value);
         return this;
     }

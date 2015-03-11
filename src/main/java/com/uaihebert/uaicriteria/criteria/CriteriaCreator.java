@@ -104,7 +104,7 @@ public class CriteriaCreator {
         basicCriteriaElements.setMaxResults(maxResults);
     }
 
-    public void addHint(final String key, final String value) {
+    public void addHint(final String key, final Object value) {
         final List<BaseCriteria> baseCriteriaList = basicCriteriaElements.getBaseCriteriaList();
 
         for (final BaseCriteria baseCriteria : baseCriteriaList) {
