@@ -250,4 +250,30 @@ public class MethodsOrTest extends AbstractTest {
 
         validateTestLists(resultFromJPQL, uaiCriteria.getResultList());
     }
+
+    @Test
+    public void isOrGreaterThanWorking() {
+        final String query = "select r from RegularEntityFour r where r.stringAttribute <> 'Just a String 01' or r.id>1";
+
+        final List<RegularEntityFour> resultFromJPQL = jpqlHelper.getListFromJPQL(query, RegularEntityFour.class);
+        assertTrue(resultFromJPQL.size() == 2);
+
+        final UaiCriteria<RegularEntityFour> uaiCriteria = createCriteria(RegularEntityFour.class);
+        uaiCriteria.andNotEquals("stringAttribute", "Just a String 01").orGreaterThan("id", 1L);
+
+        validateTestLists(resultFromJPQL, uaiCriteria.getResultList());
+    }
+
+    @Test
+    public void isMultipleOrGreaterThanWorking() {
+        final String query = "select r from RegularEntityOne r where r.integerAttributeOne >3 or r.integerAttributeTwo>2";
+
+        final List<RegularEntityOne> resultFromJPQL = jpqlHelper.getListFromJPQL(query, RegularEntityOne.class);
+        assertEquals(3, resultFromJPQL.size());
+
+        final UaiCriteria<RegularEntityOne> uaiCriteria = createCriteria(RegularEntityOne.class);
+        uaiCriteria.orGreaterThan("integerAttributeOne", 3).orGreaterThan("integerAttributeTwo", 2);
+
+        validateTestLists(resultFromJPQL, uaiCriteria.getResultList());
+    }
 }

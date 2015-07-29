@@ -106,12 +106,12 @@ public class EasyCTOImp<T> implements EasyCriteria<T> {
     }
 
     public EasyCriteria<T> andGreaterThan(final String attributeName, final Object value) {
-        criteriaConditionTypeList.add(new CriteriaConditionHolder(attributeName, CriteriaConditionType.GREATER_THAN, value));
+        criteriaConditionTypeList.add(new CriteriaConditionHolder(attributeName, CriteriaConditionType.AND_GREATER_THAN, value));
         return this;
     }
 
     public EasyCriteria<T> andGreaterThan(final boolean toLowerCase, final String attributeName, final Object value) {
-        criteriaConditionTypeList.add(new CriteriaConditionHolder(toLowerCase, attributeName, CriteriaConditionType.GREATER_THAN, value));
+        criteriaConditionTypeList.add(new CriteriaConditionHolder(toLowerCase, attributeName, CriteriaConditionType.AND_GREATER_THAN, value));
         return this;
     }
 

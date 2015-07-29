@@ -74,7 +74,7 @@ public enum CriteriaConditionType {
             uaiCriteria.orNotEquals(holder.attributeName, holder.getValueArray());
         }
     },
-    GREATER_THAN {
+    AND_GREATER_THAN {
         @Override
         public <T> void createCondition(final CriteriaConditionHolder holder, final UaiCriteriaImp<T> uaiCriteria) {
             if (holder.toLowerCase) {
@@ -83,6 +83,17 @@ public enum CriteriaConditionType {
             }
 
             uaiCriteria.andGreaterThan(holder.attributeName, holder.getValue());
+        }
+    },
+    OR_GREATER_THAN {
+        @Override
+        public <T> void createCondition(final CriteriaConditionHolder holder, final UaiCriteriaImp<T> uaiCriteria) {
+            if (holder.toLowerCase) {
+                uaiCriteria.orGreaterThan(holder.toLowerCase, holder.attributeName, holder.getValueAsString());
+                return;
+            }
+
+            uaiCriteria.orGreaterThan(holder.attributeName, holder.getValue());
         }
     },
     LESS_THAN {
