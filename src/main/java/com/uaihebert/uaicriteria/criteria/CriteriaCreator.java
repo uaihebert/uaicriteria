@@ -475,4 +475,12 @@ public class CriteriaCreator {
             MultiSelectQueryPathCreator.countAttribute(baseCriteria, attributeArray);
         }
     }
+
+    public void orGreaterThan(boolean toLowerCase, String attributeName, Object value) {
+        final List<BaseCriteria> baseCriteriaList = basicCriteriaElements.getBaseCriteriaList();
+
+        for (final BaseCriteria baseCriteria : baseCriteriaList) {
+            RegularQueryPathCreator.addOr(toLowerCase, BaseCriteria.DEFAULT_OR_PREDICATE_INDEX, baseCriteria, attributeName, new Object[]{value}, CriteriaOrType.GREATER_THAN);
+        }
+    }
 }

@@ -16,5 +16,5 @@
 package com.uaihebert.uaicriteria.criteria;
 
 public enum CriteriaOrType {
-    EQUALS, LIKE, NOT_LIKE, IS_NULL, IS_NOT_NULL
+    EQUALS, LIKE, NOT_LIKE, IS_NULL, IS_NOT_NULL, GREATER_THAN
 }

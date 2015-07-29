@@ -430,4 +430,14 @@ public class FakeUaiCriteriaCTOImp<T> implements UaiCriteria<T> {
     public UaiCriteria<T> orIsNotNull(final String attributeName) {
         return null;
     }
+
+    @Override
+    public UaiCriteria<T> orGreaterThan(String attributeName, Object value) {
+        return null;
+    }
+
+    @Override
+    public UaiCriteria<T> orGreaterThan(boolean toLowerCase, String attributeName, String value) {
+        return null;
+    }
 }
