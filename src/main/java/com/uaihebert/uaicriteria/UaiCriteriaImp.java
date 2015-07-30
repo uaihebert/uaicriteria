@@ -301,6 +301,18 @@ public class UaiCriteriaImp<T> implements UaiCriteria<T> {
     }
 
     @Override
+    public UaiCriteria<T> orGreaterThan(String attributeName, Object value) {
+        criteriaCreator.orGreaterThan(DO_NOT_APPLY_LOWER_CASE, attributeName, value);
+        return this;
+    }
+
+    @Override
+    public UaiCriteria<T> orGreaterThan(boolean toLowerCase, String attributeName, String value) {
+        criteriaCreator.orGreaterThan(toLowerCase, attributeName, value);
+        return this;
+    }
+
+    @Override
     public UaiCriteria<T> andCollectionIsEmpty(final String collectionName) {
         if (basicCriteriaElements.isBatooProvider()) {
             LOG.warning(IS_EMPTY_BATOO_MESSAGE);

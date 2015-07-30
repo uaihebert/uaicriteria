@@ -93,14 +93,15 @@ public final class RegularQueryPathCreator extends AbstractPathCreator {
         }
 
         for (final Object value : valueArray) {
-            final Predicate predicate = createEqualForOr(toLowerCase, baseCriteria, path, value, orType);
+            final Comparable typedGreaterThan = getTypedValue(baseCriteria.getEntityClass(), attributeName, value);
+            final Predicate predicate = createEqualForOr(toLowerCase, baseCriteria, path, typedGreaterThan, orType);
             final Predicate andPredicate = createAndPredicate(baseCriteria, predicate);
 
             baseCriteria.addOrPredicate(index, andPredicate);
         }
     }
 
-    private static Predicate createEqualForOr(final boolean toLowerCase, final BaseCriteria baseCriteria, final Path path, final Object value, final CriteriaOrType orType) {
+    private static Predicate createEqualForOr(final boolean toLowerCase, final BaseCriteria baseCriteria, final Path path, final Comparable value, final CriteriaOrType orType) {
         if (CriteriaOrType.LIKE.equals(orType)) {
             return RegularQueryPredicateCreator.createLikePredicate(toLowerCase, baseCriteria.getCriteriaBuilder(), path, value.toString());
         }
@@ -117,6 +118,10 @@ public final class RegularQueryPathCreator extends AbstractPathCreator {
         if (CriteriaOrType.IS_NOT_NULL.equals(orType)) {
             final Predicate isNullPredicate = RegularQueryPredicateCreator.createIsNullPredicate(baseCriteria.getCriteriaBuilder(), path);
             return isNullPredicate.not();
+        }
+
+        if (CriteriaOrType.GREATER_THAN.equals(orType)) {
+            return RegularQueryPredicateCreator.createGreaterThanPredicate(toLowerCase, baseCriteria.getCriteriaBuilder(), path, value);
         }
 
         return RegularQueryPredicateCreator.createEqualPredicate(toLowerCase, baseCriteria.getCriteriaBuilder(), path, value);
@@ -190,6 +195,15 @@ public final class RegularQueryPathCreator extends AbstractPathCreator {
     }
 
     public static void andGreaterThan(final boolean toLowerCase, final BaseCriteria baseCriteria, final String attributeName, final Object value) {
+        final Path path = PathHelper.extractPath(baseCriteria, attributeName);
+
+        final Comparable typedValue = getTypedValue(baseCriteria.getEntityClass(), attributeName, value);
+        final Predicate equalPredicate = RegularQueryPredicateCreator.createGreaterThanPredicate(toLowerCase, baseCriteria.getCriteriaBuilder(), path, typedValue);
+
+        finishWithAndPredicate(baseCriteria, equalPredicate);
+    }
+
+    public static void orGreaterThan(final boolean toLowerCase, final BaseCriteria baseCriteria, final String attributeName, final Object value) {
         final Path path = PathHelper.extractPath(baseCriteria, attributeName);
 
         final Comparable typedValue = getTypedValue(baseCriteria.getEntityClass(), attributeName, value);

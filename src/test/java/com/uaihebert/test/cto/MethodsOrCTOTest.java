@@ -15,11 +15,17 @@
  * */
 package com.uaihebert.test.cto;
 
+import com.uaihebert.model.test.RegularEntityFour;
 import com.uaihebert.model.test.RegularEntityOne;
 import com.uaihebert.test.AbstractTest;
 import com.uaihebert.uaicriteria.UaiCriteria;
 import com.uaihebert.uaicriteria.UaiCriteriaFactory;
 import org.junit.Test;
+
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class MethodsOrCTOTest extends AbstractTest {
 
@@ -256,5 +262,33 @@ public class MethodsOrCTOTest extends AbstractTest {
         final UaiCriteria<RegularEntityOne> uaiCriteriaCTO = createCriteria(RegularEntityOne.class, cto);
 
         validateTestLists(uaiCriteria.getResultList(), uaiCriteriaCTO.getResultList());
+    }
+
+    @Test
+    public void isOrGreaterThanWorking() {
+        final UaiCriteria<RegularEntityFour> uaiCriteria = createCriteria(RegularEntityFour.class);
+        uaiCriteria.andNotEquals("stringAttribute", "Just a String 01").orGreaterThan("id", 1L);
+
+        final UaiCriteria<RegularEntityFour> cto = UaiCriteriaFactory.createQueryUaiCTO();
+        cto.andNotEquals("stringAttribute", "Just a String 01").orGreaterThan("id", 1L);
+
+        final UaiCriteria<RegularEntityFour> uaiCriteriaCTO = createCriteria(RegularEntityFour.class, cto);
+
+        validateTestLists(uaiCriteriaCTO.getResultList(), uaiCriteria.getResultList());
+    }
+
+    @Test
+    public void isMultipleOrGreaterThanWorking() {
+        final UaiCriteria<RegularEntityOne> uaiCriteria = createCriteria(RegularEntityOne.class);
+        uaiCriteria.orGreaterThan("integerAttributeOne", 3).orGreaterThan("integerAttributeTwo", 2);
+        List<RegularEntityOne> listFromCriteria = uaiCriteria.getResultList();
+
+        final UaiCriteria<RegularEntityOne> cto = UaiCriteriaFactory.createQueryUaiCTO();
+        cto.orGreaterThan("integerAttributeOne", 3).orGreaterThan("integerAttributeTwo", 2);
+        final UaiCriteria<RegularEntityOne> uaiCriteriaCTO = createCriteria(RegularEntityOne.class, cto);
+        List<RegularEntityOne> listFromCTO = uaiCriteriaCTO.getResultList();
+
+
+        validateTestLists(listFromCriteria, listFromCTO);
     }
 }
