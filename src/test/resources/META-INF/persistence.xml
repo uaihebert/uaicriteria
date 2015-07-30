@@ -19,8 +19,8 @@
             <property name="hibernate.hbm2ddl.auto" value="update"/>
             <property name="javax.persistence.validation.mode" value="none"/>
 
-            <property name="hibernate.show_sql" value="true"/>
-            <property name="hibernate.format_sql" value="true"/>
+            <!--<property name="hibernate.show_sql" value="true"/>-->
+            <!--<property name="hibernate.format_sql" value="true"/>-->
         </properties>
     </persistence-unit>
 
@@ -39,8 +39,8 @@
             <property name="hibernate.hbm2ddl.auto" value="update"/>
             <property name="javax.persistence.validation.mode" value="none"/>
 
-            <property name="hibernate.show_sql" value="true"/>
-            <property name="hibernate.format_sql" value="true"/>
+            <!--<property name="hibernate.show_sql" value="true"/>-->
+            <!--<property name="hibernate.format_sql" value="true"/>-->
         </properties>
     </persistence-unit>
 
@@ -56,7 +56,7 @@
             <property name="openjpa.ConnectionPassword" value=""/>
             <property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema(ForeignKeys=true)"/>
 
-            <property name="openjpa.Log" value="DefaultLevel=WARN, Runtime=INFO, Tool=INFO, SQL=TRACE"/>
+            <!--<property name="openjpa.Log" value="DefaultLevel=WARN, Runtime=INFO, Tool=INFO, SQL=TRACE"/>-->
         </properties>
     </persistence-unit>
 
@@ -77,7 +77,7 @@
             <property name="openjpa.ConnectionPassword" value=""/>
             <property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema(ForeignKeys=true)"/>
 
-            <property name="openjpa.Log" value="DefaultLevel=WARN, Runtime=TRACE, Tool=TRACE, SQL=TRACE"/>
+            <!--<property name="openjpa.Log" value="DefaultLevel=WARN, Runtime=TRACE, Tool=TRACE, SQL=TRACE"/>-->
         </properties>
     </persistence-unit>
 
@@ -112,7 +112,7 @@
             <property name="eclipselink.ddl-generation" value="create-tables"/>
             <property name="eclipselink.ddl-generation.output-mode" value="database"/>
 
-            <property name="eclipselink.logging.level" value="FINEST"/>
+            <!--<property name="eclipselink.logging.level" value="FINEST"/>-->
         </properties>
     </persistence-unit>
 
@@ -129,7 +129,7 @@
             <property name="eclipselink.ddl-generation" value="create-tables"/>
             <property name="eclipselink.ddl-generation.output-mode" value="database"/>
 
-            <property name="eclipselink.logging.level" value="FINEST"/>
+            <!--<property name="eclipselink.logging.level" value="FINEST"/>-->
         </properties>
     </persistence-unit>
 
@@ -146,7 +146,7 @@
             <property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
             <property name="eclipselink.ddl-generation.output-mode" value="database"/>
 
-            <property name="eclipselink.logging.level" value="FINEST"/>
+            <!--<property name="eclipselink.logging.level" value="FINEST"/>-->
         </properties>
     </persistence-unit>
 </persistence>
