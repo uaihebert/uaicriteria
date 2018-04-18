@@ -20,6 +20,9 @@ import com.uaihebert.util.ReflectionUtil;
 
 import javax.persistence.criteria.Predicate;
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -48,6 +51,19 @@ public class AbstractPathCreator {
 
         if (ReflectionUtil.isDate(entityClass, attributeName)) {
             return (Date) value;
+        }
+
+
+        if (ReflectionUtil.isLocalDate(entityClass, attributeName)) {
+            return (LocalDate) value;
+        }
+
+        if (ReflectionUtil.isLocalDateTime(entityClass, attributeName)) {
+            return (LocalDateTime) value;
+        }
+
+        if (ReflectionUtil.isLocalTime(entityClass, attributeName)) {
+            return (LocalTime) value;
         }
 
         if (ReflectionUtil.isString(entityClass, attributeName)) {
