@@ -167,6 +167,22 @@ public final class ReflectionUtil {
         return attributeType.toLowerCase().contains("calendar");
     }
 
+    public static <T> boolean isLocalDate(final Class<T> entityClass, final String attributeName) {
+        final String attributeType = getAttributeType(entityClass, attributeName);
+        return attributeType.toLowerCase().matches(".*time\\.localdate$");
+    }
+
+    public static <T> boolean isLocalDateTime(final Class<T> entityClass, final String attributeName) {
+        final String attributeType = getAttributeType(entityClass, attributeName);
+        return attributeType.toLowerCase().matches(".*time\\.localdatetime$");
+    }
+
+    public static <T> boolean isLocalTime(final Class<T> entityClass, final String attributeName) {
+        final String attributeType = getAttributeType(entityClass, attributeName);
+        return attributeType.toLowerCase().matches(".*time\\.localtime$");
+    }
+
+
     private static boolean isBagType(final Class<?> entityClass) {
         return ALLOWED_BAG_TYPES.contains(entityClass);
     }
